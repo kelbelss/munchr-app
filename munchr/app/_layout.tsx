@@ -9,6 +9,10 @@ import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 
+const customFont = {
+  fontFamily: "Imprima-Regular",
+};
+
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -24,7 +28,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    Imprima: require("../assets/fonts/Imprima-Regular.ttf"),
     ...FontAwesome.font,
   });
 

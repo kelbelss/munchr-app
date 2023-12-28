@@ -10,10 +10,9 @@ import {
 } from "react-native";
 
 import Colors from "../constants/Colors";
-import CustomFont from "/munchr/assets/fonts/Imprima-Regular.ttf";
 
 const customFont = {
-  fontFamily: "Imprima",
+  fontFamily: "Imprima-Regular",
 };
 
 type ThemeProps = {
