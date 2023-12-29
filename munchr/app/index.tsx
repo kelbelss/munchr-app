@@ -1,12 +1,24 @@
 import { Alert, Image, View, Button, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { supabase } from '../config/supabase';
+import * as Font from 'expo-font';
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        // Load custom font asynchronously
+        async function loadCustomFont() {
+            await Font.loadAsync({
+                'IrishGrover-Regular': require('../assets/fonts/irishgrover.ttf'),
+            });
+        }
+
+        loadCustomFont();
+    }, []);
 
 
     // sign in with email and password
@@ -39,7 +51,7 @@ const Login = () => {
         <View style={styles.container}>
             <Spinner visible={loading} />
 
-            <Text style={styles.header}>Munchr</Text>
+            <Text style={styles.header}>MUNCHR</Text>
 
             <Image style={styles.logo} source={require('../assets/images/icon.png')} />
 
@@ -64,9 +76,9 @@ const styles = StyleSheet.create({
         backgroundColor: "#EDF0F6",
     },
     header: {
-        fontSize: 60,
+        fontSize: 70,
         textAlign: "center",
-        fontFamily: "IrishGrover Regular",
+        fontFamily: "irishgrover",
         marginTop: 60,
         marginBottom: 20,
         color: "#E6DBC8",
