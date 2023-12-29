@@ -14,6 +14,7 @@ const Login = () => {
         async function loadCustomFont() {
             await Font.loadAsync({
                 'IrishGrover-Regular': require('../assets/fonts/irishgrover.ttf'),
+                'Imprima-Regular': require('../assets/fonts/Imprima-Regular.ttf'),
             });
         }
 
@@ -59,9 +60,16 @@ const Login = () => {
             <TextInput placeholder="password" value={password} onChangeText={setPassword} secureTextEntry style={styles.inputField} />
 
             <TouchableOpacity onPress={onSignInPress} style={styles.button}>
-                <Text style={{ color: '#363232' }}>Sign in</Text>
+                <Text style={{ color: '#363232', fontFamily: 'Imprima-Regular', fontSize: 18 }}>Sign in</Text>
             </TouchableOpacity>
-            <Button onPress={onSignUpPress} title="Create Account" color={'#363232'}></Button>
+
+            <TouchableOpacity onPress={onSignUpPress}>
+                <Text style={styles.signBtn}>Create Account</Text>
+            </TouchableOpacity>
+            <View style={styles.logInLogos}>
+                <Image style={styles.apple} source={require('../assets/images/apple.png')} />
+                <Image style={styles.google} source={require('../assets/images/google.png')} />
+            </View>
         </View >
     );
 };
@@ -80,13 +88,14 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontFamily: "irishgrover",
         marginTop: 60,
-        marginBottom: 20,
+        marginBottom: 12,
         color: "#E6DBC8",
     },
     logo: {
-        height: 200,
-        width: 200,
+        height: 180,
+        width: 180,
         alignSelf: 'center',
+        marginBottom: 50,
     },
 
     inputField: {
@@ -98,6 +107,9 @@ const styles = StyleSheet.create({
         padding: 10,
         color: "#363232",
         backgroundColor: "#F3F2F0",
+        fontFamily: 'Imprima-Regular',
+        fontSize: 18,
+        marginHorizontal: 20,
     },
     button: {
         marginVertical: 15,
@@ -105,7 +117,29 @@ const styles = StyleSheet.create({
         backgroundColor: "#E6DBC8",
         padding: 12,
         borderRadius: 4,
+        marginBottom: 100,
+        marginHorizontal: 20,
     },
+    signBtn: {
+        fontFamily: 'Imprima-Regular',
+        textAlign: "center",
+        color: '#363232',
+        fontSize: 18,
+    },
+    logInLogos: {
+        flexDirection: 'row',
+        alignSelf: 'center',
+        margin: 16,
+    },
+    apple: {
+        width: 50,
+        height: 50,
+    },
+    google: {
+        margin: 5,
+        width: 42,
+        height: 42,
+    }
 });
 
 export default Login;
