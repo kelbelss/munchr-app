@@ -1,4 +1,4 @@
-import { Alert, View, Button, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Alert, Image, View, Button, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { supabase } from '../config/supabase';
@@ -41,6 +41,8 @@ const Login = () => {
 
             <Text style={styles.header}>Munchr</Text>
 
+            <Image style={styles.logo} source={require('../assets/images/icon.png')} />
+
             <TextInput autoCapitalize="none" placeholder="john@doe.com" value={email} onChangeText={setEmail} style={styles.inputField} />
             <TextInput placeholder="password" value={password} onChangeText={setPassword} secureTextEntry style={styles.inputField} />
 
@@ -52,6 +54,8 @@ const Login = () => {
     );
 };
 
+
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -62,9 +66,17 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 60,
         textAlign: "center",
-        margin: 50,
+        fontFamily: "IrishGrover Regular",
+        marginTop: 60,
+        marginBottom: 20,
         color: "#E6DBC8",
     },
+    logo: {
+        height: 200,
+        width: 200,
+        alignSelf: 'center',
+    },
+
     inputField: {
         marginVertical: 4,
         height: 50,
