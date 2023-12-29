@@ -47,6 +47,21 @@ const Login = () => {
         setLoading(false);
     };
 
+    // google log in
+    const Google =
+
+
+
+    // apple log in
+    const Apple =
+
+
+
+
+
+    // create account page
+    
+
 
     return (
         <View style={styles.container}>
@@ -70,8 +85,8 @@ const Login = () => {
             <Text style={styles.or}>or</Text>
 
             <View style={styles.logInLogos}>
-                <Image style={styles.apple} source={require('../assets/images/apple.png')} />
-                <Image style={styles.google} source={require('../assets/images/google.png')} />
+                <Image onPress={ } style={styles.apple} source={require('../assets/images/apple.png')} />
+                <Image onPress={ } style={styles.google} source={require('../assets/images/google.png')} />
             </View>
         </View >
     );
@@ -100,7 +115,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginBottom: 50,
     },
-
     inputField: {
         marginVertical: 4,
         height: 50,
