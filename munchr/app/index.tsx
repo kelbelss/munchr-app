@@ -13,8 +13,8 @@ const Login = () => {
         // Load custom font asynchronously
         async function loadCustomFont() {
             await Font.loadAsync({
-                'IrishGrover-Regular': require('../assets/fonts/irishgrover.ttf'),
-                'Imprima-Regular': require('../assets/fonts/Imprima-Regular.ttf'),
+                'irish_grover': require('../assets/fonts/irish_grover.ttf'),
+                'imprima': require('../assets/fonts/imprima.ttf'),
             });
         }
 
@@ -56,16 +56,19 @@ const Login = () => {
 
             <Image style={styles.logo} source={require('../assets/images/icon.png')} />
 
-            <TextInput autoCapitalize="none" placeholder="john@doe.com" value={email} onChangeText={setEmail} style={styles.inputField} />
-            <TextInput placeholder="password" value={password} onChangeText={setPassword} secureTextEntry style={styles.inputField} />
+            <TextInput autoCapitalize="none" placeholder="gavin@hooli.com" value={email} onChangeText={setEmail} style={styles.inputField} />
+            <TextInput autoCapitalize="none" placeholder="password" value={password} onChangeText={setPassword} secureTextEntry style={styles.inputField} />
 
             <TouchableOpacity onPress={onSignInPress} style={styles.button}>
-                <Text style={{ color: '#363232', fontFamily: 'Imprima-Regular', fontSize: 18 }}>Sign in</Text>
+                <Text style={{ color: '#363232', fontFamily: 'imprima', fontSize: 18 }}>Sign in</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={onSignUpPress}>
                 <Text style={styles.signBtn}>Create Account</Text>
             </TouchableOpacity>
+
+            <Text style={styles.or}>or</Text>
+
             <View style={styles.logInLogos}>
                 <Image style={styles.apple} source={require('../assets/images/apple.png')} />
                 <Image style={styles.google} source={require('../assets/images/google.png')} />
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 70,
         textAlign: "center",
-        fontFamily: "irishgrover",
+        fontFamily: "irish_grover",
         marginTop: 60,
         marginBottom: 12,
         color: "#E6DBC8",
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
         padding: 10,
         color: "#363232",
         backgroundColor: "#F3F2F0",
-        fontFamily: 'Imprima-Regular',
+        fontFamily: 'imprima',
         fontSize: 18,
         marginHorizontal: 20,
     },
@@ -117,14 +120,21 @@ const styles = StyleSheet.create({
         backgroundColor: "#E6DBC8",
         padding: 12,
         borderRadius: 4,
-        marginBottom: 100,
+        marginBottom: 15,
         marginHorizontal: 20,
     },
     signBtn: {
-        fontFamily: 'Imprima-Regular',
+        fontFamily: 'imprima',
         textAlign: "center",
         color: '#363232',
         fontSize: 18,
+    },
+    or: {
+        fontFamily: 'imprima',
+        textAlign: "center",
+        color: '#363232',
+        fontSize: 18,
+        marginTop: 32,
     },
     logInLogos: {
         flexDirection: 'row',
