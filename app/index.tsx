@@ -1,4 +1,5 @@
-import { Alert, Image, View, Button, TextInput, StyleSheet, Text, TouchableOpacity, StatusBar } from 'react-native';
+import { Alert, Image, View, Button, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { supabase } from '../config/supabase';
@@ -67,8 +68,9 @@ const Login = () => {
     return (
         <View style={styles.container}>
             <SafeAreaView edges={['top']} style={styles.safeArea}>
-                <StatusBar animated={true} backgroundColor="#000" barStyle="dark-content"/>
+                <StatusBar style="dark"/>
             </SafeAreaView>
+
             <Spinner visible={loading} />
 
             <Text style={styles.header}>MUNCHR</Text>
@@ -100,9 +102,10 @@ const Login = () => {
 
 const styles = StyleSheet.create({
     safeArea: {
+        height: 1,
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#EDF0F6',
+        backgroundColor: '#000',
     },
     container: {
         flex: 1,
