@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { supabase } from '../config/supabase';
 import * as Font from 'expo-font';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -62,14 +61,14 @@ const Login = () => {
 
 
     // create account page
-    
+
 
 
     return (
         <View style={styles.container}>
-            <SafeAreaView edges={['top']} style={styles.safeArea}>
-                <StatusBar style="dark"/>
-            </SafeAreaView>
+
+            <StatusBar style="dark" />
+
 
             <Spinner visible={loading} />
 
@@ -101,12 +100,6 @@ const Login = () => {
 
 
 const styles = StyleSheet.create({
-    safeArea: {
-        height: 1,
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: '#000',
-    },
     container: {
         flex: 1,
         paddingTop: 50,
