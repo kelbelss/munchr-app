@@ -1,8 +1,9 @@
-import { Alert, Image, View, Button, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Alert, Image, View, Button, TextInput, StyleSheet, Text, TouchableOpacity, StatusBar } from 'react-native';
 import { useEffect, useState } from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { supabase } from '../config/supabase';
 import * as Font from 'expo-font';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -48,12 +49,12 @@ const Login = () => {
     };
 
     // google log in
-    const Google =
+    // const Google =
 
 
 
     // apple log in
-    const Apple =
+    // const Apple =
 
 
 
@@ -65,6 +66,9 @@ const Login = () => {
 
     return (
         <View style={styles.container}>
+            <SafeAreaView edges={['top']} style={styles.safeArea}>
+                <StatusBar animated={true} backgroundColor="#000" barStyle="dark-content"/>
+            </SafeAreaView>
             <Spinner visible={loading} />
 
             <Text style={styles.header}>MUNCHR</Text>
@@ -85,8 +89,8 @@ const Login = () => {
             <Text style={styles.or}>or</Text>
 
             <View style={styles.logInLogos}>
-                <Image onPress={ } style={styles.apple} source={require('../assets/images/apple.png')} />
-                <Image onPress={ } style={styles.google} source={require('../assets/images/google.png')} />
+                <Image style={styles.apple} source={require('../assets/images/apple.png')} />
+                <Image style={styles.google} source={require('../assets/images/google.png')} />
             </View>
         </View >
     );
@@ -95,6 +99,11 @@ const Login = () => {
 
 
 const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: '#EDF0F6',
+    },
     container: {
         flex: 1,
         paddingTop: 50,
