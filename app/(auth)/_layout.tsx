@@ -50,6 +50,7 @@ const TabLayout = () => {
             screenOptions={{
                 headerStyle: {
                     backgroundColor: '#EDF0F6',
+                    borderBottomWidth: 0,
                 },
                 tabBarStyle: {
                     backgroundColor: '#EDF0F6',
@@ -62,6 +63,14 @@ const TabLayout = () => {
                 name="chat-page"
                 options={{
                     title: "Munchr",
+                    tabBarLabelStyle: {
+                        fontSize: 14,
+                    },
+                    headerTitleStyle: {
+                        fontSize: 40,
+                        color: '#E6DBC8',
+                        fontFamily: "irish_grover",
+                    },
                     tabBarIcon: () => <Entypo name="bowl" color='#363232' size={28} />,
                 }}
             />
@@ -69,8 +78,11 @@ const TabLayout = () => {
                 name="account"
                 options={{
                     title: "Account",
+                    tabBarLabelStyle: {
+                        fontSize: 14,
+                    },
                     tabBarIcon: () => (
-                        <MaterialCommunityIcons name="account" color='#363232' size={28} />
+                        <MaterialCommunityIcons name="account" color='#363232' size={32} />
                     ),
                     headerRight: () => (
                         <TouchableOpacity onPress={signOut}>
