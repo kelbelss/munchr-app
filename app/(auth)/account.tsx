@@ -13,7 +13,7 @@ const list = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>You are authorized!</Text>
+            <Text style={styles.text}>You are currently signed in!</Text>
         </View>
     );
 };
@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#363636',
+        backgroundColor: '#EDF0F6',
     },
     text: {
-        color: '#fff',
+        color: '#585555',
     },
 });
 
