@@ -1,4 +1,4 @@
-import { Alert, Image, View, Button, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Alert, Image, View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -45,6 +45,7 @@ const Login = () => {
         });
 
         if (error) Alert.alert(error.message);
+        else Alert.alert('Sign up successful');
         setLoading(false);
     };
 
