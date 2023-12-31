@@ -43,6 +43,8 @@ import TabOneScreen from './chat-page';
 
 const TabLayout = () => {
 
+    const { signOut, session } = useAuth();
+
     return (
         <Tabs
             screenOptions={{
@@ -69,6 +71,11 @@ const TabLayout = () => {
                     title: "Account",
                     tabBarIcon: () => (
                         <MaterialCommunityIcons name="account" color='#363232' size={28} />
+                    ),
+                    headerRight: () => (
+                        <TouchableOpacity onPress={signOut}>
+                            <Ionicons name="log-out-outline" size={30} color={'#585555'} />
+                        </TouchableOpacity>
                     ),
                 }}
             />

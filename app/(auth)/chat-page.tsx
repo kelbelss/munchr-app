@@ -1,12 +1,31 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { Button, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { TextInput } from "react-native-gesture-handler";
+
+// const onInput (() => {
+//     input: value={input}
+// })
+
 
 export default function TabOneScreen() {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Ask AI</Text>
-            <View
-                style={styles.separator}
-            />
+            <View style={styles.inputContainer}>
+                <Pressable>
+                    {({ pressed }) => (
+                        <Ionicons
+                            name="ios-filter"
+                            size={38}
+                            color='363232'
+                            style={{ marginRight: 10, opacity: pressed ? 0.5 : 1 }}
+                        />
+                    )}
+                </Pressable>
+                <TextInput autoCapitalize="none" placeholder="Ask Munchr" style={styles.userInput} />
+                <TouchableOpacity style={styles.button}>
+                    <Text style={{ color: '#363232', fontFamily: 'imprima', fontSize: 18 }}>Submit</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -14,17 +33,45 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
         backgroundColor: '#EDF0F6',
     },
-    title: {
-        fontSize: 20,
-        fontWeight: "bold",
+    inputContainer: {
+        position: 'absolute',
+        bottom: 0,
+        height: 50,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 20,
     },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: "80%",
+    userInput: {
+        // height: 50,
+        borderWidth: 1,
+        borderColor: "#E6DBC8",
+        borderRadius: 4,
+        padding: 12,
+        color: "#363232",
+        backgroundColor: "#F3F2F0",
+        fontFamily: 'imprima',
+        fontSize: 18,
+        marginHorizontal: 5,
+        width: 230,
+
     },
+    button: {
+        backgroundColor: "#E6DBC8",
+        padding: 12,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: "#E6DBC8",
+        // height: 50,
+        fontFamily: 'imprima',
+        fontSize: 18,
+    },
+    // separator: {
+    //     marginVertical: 30,
+    //     height: 1,
+    //     width: "80%",
+    // },
 });
