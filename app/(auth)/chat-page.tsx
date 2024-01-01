@@ -13,7 +13,7 @@ export default function TabOneScreen() {
             <View style={styles.inputContainer}>
                 <Pressable>
                     {({ pressed }) => (
-                        <Image style={{ opacity: pressed ? 0.5 : 1 }} source={require('../assets/images/filter.png')} />
+                        <Image style={{ opacity: pressed ? 0.5 : 1 }} source={require('../app/(auth)/filter.png')} />
                     )}
                 </Pressable>
                 <TextInput autoCapitalize="none" placeholder="Ask Munchr" style={styles.userInput} />
