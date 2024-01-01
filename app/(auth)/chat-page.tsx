@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Button, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Button, Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
 // const onInput (() => {
@@ -13,12 +13,7 @@ export default function TabOneScreen() {
             <View style={styles.inputContainer}>
                 <Pressable>
                     {({ pressed }) => (
-                        <Ionicons
-                            name="ios-filter"
-                            size={38}
-                            color='363232'
-                            style={{ marginRight: 10, opacity: pressed ? 0.5 : 1 }}
-                        />
+                        <Image style={{ opacity: pressed ? 0.5 : 1 }} source={require('../assets/images/filter.png')} />
                     )}
                 </Pressable>
                 <TextInput autoCapitalize="none" placeholder="Ask Munchr" style={styles.userInput} />
@@ -69,6 +64,7 @@ const styles = StyleSheet.create({
         fontFamily: 'imprima',
         fontSize: 18,
     },
+
     // separator: {
     //     marginVertical: 30,
     //     height: 1,
