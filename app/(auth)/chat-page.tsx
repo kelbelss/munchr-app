@@ -1,4 +1,3 @@
-import { Ionicons } from "@expo/vector-icons";
 import { Button, Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
@@ -6,6 +5,7 @@ import { TextInput } from "react-native-gesture-handler";
 //     input: value={input}
 // })
 
+const filterImage = require('/Users/kellysmulian/GitHub/munchr-app/assets/images/filter.png');
 
 export default function TabOneScreen() {
     return (
@@ -13,7 +13,7 @@ export default function TabOneScreen() {
             <View style={styles.inputContainer}>
                 <Pressable>
                     {({ pressed }) => (
-                        <Image style={{ opacity: pressed ? 0.5 : 1 }} source={require('../app/(auth)/filter.png')} />
+                        <Image style={{ opacity: pressed ? 0.5 : 1, height: 45, width: 40 }} source={filterImage} />
                     )}
                 </Pressable>
                 <TextInput autoCapitalize="none" placeholder="Ask Munchr" style={styles.userInput} />
@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
         fontFamily: 'imprima',
         fontSize: 18,
         marginHorizontal: 5,
-        width: 230,
+        width: 265,
+        marginLeft: 10,
 
     },
     button: {
