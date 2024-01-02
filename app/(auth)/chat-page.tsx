@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
         fontFamily: 'imprima',
         fontSize: 18,
         marginHorizontal: 5,
-        width: 265,
+        width: 245,
         marginLeft: 10,
         marginTop: 10,
         marginBottom: 20,
