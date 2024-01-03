@@ -1,4 +1,4 @@
-import { Slot, useRouter, useSegments } from 'expo-router';
+import { Slot, Stack, useRouter, useSegments } from 'expo-router';
 import { useEffect } from 'react';
 import { AuthProvider, useAuth } from '../provider/AuthProvider';
 
@@ -16,7 +16,7 @@ const InitialLayout = () => {
 
         if (session && !inAuthGroup) {
             // Redirect authenticated users to the list page
-            router.replace('/list');
+            router.replace('/chat-page');
         } else if (!session) {
             // Redirect unauthenticated users to the login page
             router.replace('/');
