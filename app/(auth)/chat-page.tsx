@@ -37,7 +37,7 @@ export default function TabOneScreen() {
 
                     <TouchableOpacity style={styles.toggleBlock} onPress={toggleFullRecipe}>
                         <View style={styles.buttonContainer}>
-                            <Text style={styles.buttonText}>
+                            <Text style={[styles.buttonText, showFullRecipe ? styles.underline : {}]}>
                                 {showFullRecipe ? 'Full Recipe' : 'Full Recipe'}
                             </Text>
                             <AntDesign name={showFullRecipe ? 'up' : 'down'} size={24} color="black" />
@@ -53,7 +53,7 @@ export default function TabOneScreen() {
 
                     <TouchableOpacity style={styles.toggleBlock} onPress={toggleShoppingList}>
                         <View style={styles.buttonContainer}>
-                            <Text style={styles.buttonText}>
+                            <Text style={[styles.buttonText, showShoppingList ? styles.underline : {}]}>
                                 {showShoppingList ? 'Shopping List' : 'Shopping List'}
                             </Text>
                             <AntDesign name={showShoppingList ? 'up' : 'down'} size={24} color="black" />
@@ -81,7 +81,7 @@ export default function TabOneScreen() {
                     <Text style={{ color: '#363232', fontFamily: 'imprima', fontSize: 18 }}>Submit</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </View >
     );
 }
 
@@ -197,6 +197,13 @@ const styles = StyleSheet.create({
         fontFamily: 'imprima',
         fontSize: 18,
         marginRight: 20,
+    },
+    underline: {
+        color: '#363232',
+        fontFamily: 'imprima',
+        fontSize: 18,
+        marginRight: 20,
+        textDecorationLine: 'underline',
     },
     expandedBlock: {
         backgroundColor: '#F3F2F0',
