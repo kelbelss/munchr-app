@@ -38,7 +38,7 @@ export default function TabOneScreen() {
                     <TouchableOpacity style={styles.toggleBlock} onPress={toggleFullRecipe}>
                         <View style={styles.buttonContainer}>
                             <Text style={[styles.buttonText, showFullRecipe ? styles.underline : {}]}>
-                                {showFullRecipe ? 'Full Recipe' : 'Full Recipe'}
+                                Full Recipe
                             </Text>
                             <AntDesign name={showFullRecipe ? 'up' : 'down'} size={24} color="black" />
                         </View>
