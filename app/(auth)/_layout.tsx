@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native';
 import { Entypo, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import TabOneScreen from './chat-page';
 
+
 // Simple stack layout within the authenticated area
 // const StackLayout = () => {
 //     const { signOut, session } = useAuth();
@@ -39,7 +40,6 @@ import TabOneScreen from './chat-page';
 // };
 
 // export default StackLayout;
-
 
 const TabLayout = () => {
 

@@ -1,11 +1,16 @@
-import { Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Modal, Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from "react";
+import { Feather } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
 
 const filterImage = require('/Users/kellysmulian/GitHub/munchr-app/assets/images/filter.png');
 
 export default function TabOneScreen() {
+
+    // modal
+    const [modalVisible, setModalVisible] = useState(false);
 
     const [showFullRecipe, setShowFullRecipe] = useState(false);
     const [showShoppingList, setShowShoppingList] = useState(false);
@@ -22,8 +27,10 @@ export default function TabOneScreen() {
 
     const shopping = "boneless, skinless chicken breasts \nolive oil \nlemons \ngarlic \ndried oregano \ndried thyme \npaprika \nsalt and black pepper \nparsley or cilantro";
 
+
     return (
         <View style={styles.container}>
+
             <ScrollView style={styles.scrollView}>
                 <View style={styles.outputContainer}>
                     <Text style={styles.outputHeading}>Grilled Lemon Herb Chicken</Text>
@@ -64,8 +71,67 @@ export default function TabOneScreen() {
                 </View>
             </ScrollView >
 
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                }}
+            >
+                <View style={styles.modalCenteredView}>
+
+                    <View style={styles.modalView}>
+
+                        <View style={styles.modalHeader}>
+
+                            <Pressable
+                                onPress={() => setModalVisible(!modalVisible)}
+                            >
+                                <Feather name="arrow-left" size={28} color="black" />
+                            </Pressable>
+
+                            <Text style={styles.modalHeaderText}>Filter Preferences</Text>
+                        </View>
+                        <View
+                            style={{
+                                borderBottomColor: '#585555',
+                                borderBottomWidth: StyleSheet.hairlineWidth,
+                            }}
+                        />
+                        <ScrollView style={styles.filterContainer}>
+                            <View style={styles.diet}>
+                                <Text style={styles.modalText}>Dietary Requirements:</Text>
+                                <Text style={styles.dietText}>Gluten Free, Vegan</Text>
+                            </View>
+
+                            <View
+                                style={{
+                                    borderBottomColor: '#585555',
+                                    borderBottomWidth: StyleSheet.hairlineWidth,
+                                }}
+                            />
+
+                            <View style={styles.vitality}>
+                                <Text style={styles.modalText}>Are you a Vitality member?</Text>
+                                <Fontisto name="toggle-off" size={30} color="black" />
+                            </View>
+
+                            <View
+                                style={{
+                                    borderBottomColor: '#585555',
+                                    borderBottomWidth: StyleSheet.hairlineWidth,
+                                }}
+                            />
+
+                        </ScrollView>
+
+                    </View>
+                </View>
+            </Modal>
+
             <View style={styles.inputContainer}>
-                <Pressable>
+                <Pressable onPress={() => setModalVisible(true)}>
                     {({ pressed }) => (
                         <Image style={{ opacity: pressed ? 0.5 : 1, height: 45, width: 40, marginBottom: 20, marginTop: 10 }} source={filterImage} />
                     )}
@@ -95,10 +161,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginHorizontal: '4%',
         marginVertical: '5%',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.8,
-        shadowRadius: 1,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 2
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 4,
+        // elevation: 5,
         borderRadius: 6,
         overflow: 'scroll',
     },
@@ -210,5 +280,61 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+    },
+    modalCenteredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22,
+        // backgroundColor: "#363232",
+    },
+    modalView: {
+        width: '92%',
+        height: '88%',
+        margin: 20,
+        backgroundColor: "#F3F2F0",
+        borderRadius: 6,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    modalHeader: {
+        flexDirection: 'row',
+        padding: 25,
+    },
+    modalHeaderText: {
+        color: '#000000',
+        fontFamily: 'imprima',
+        fontSize: 26,
+        marginLeft: 54,
+    },
+    modalText: {
+        color: '#363232',
+        fontFamily: 'imprima',
+        fontSize: 22,
+    },
+    filterContainer: {
+        paddingHorizontal: 25,
+    },
+    diet: {
+        paddingVertical: 25,
+    },
+    dietText: {
+        paddingHorizontal: 15,
+        paddingTop: 20,
+        fontFamily: 'imprima',
+        fontSize: 18,
+        color: '#363232',
+    },
+    vitality: {
+        paddingVertical: 25,
+        paddingRight: 40,
+        flexDirection: 'row',
+        justifyContent: "space-between",
     }
 });
