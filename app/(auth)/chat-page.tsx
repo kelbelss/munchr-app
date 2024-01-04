@@ -3,12 +3,6 @@ import { TextInput } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from "react";
 
-
-// const onInput (() => {
-//     input: value={input}
-// })
-
-
 const filterImage = require('/Users/kellysmulian/GitHub/munchr-app/assets/images/filter.png');
 
 export default function TabOneScreen() {
