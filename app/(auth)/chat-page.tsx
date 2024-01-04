@@ -52,7 +52,7 @@ export default function TabOneScreen() {
                     <TouchableOpacity style={styles.toggleBlock} onPress={toggleShoppingList}>
                         <View style={styles.buttonContainer}>
                             <Text style={[styles.buttonText, showShoppingList ? styles.underline : {}]}>
-                                {showShoppingList ? 'Shopping List' : 'Shopping List'}
+                                Shopping List
                             </Text>
                             <AntDesign name={showShoppingList ? 'up' : 'down'} size={24} color="black" />
                         </View>
