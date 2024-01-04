@@ -71,7 +71,9 @@ const TabLayout = () => {
                         color: '#E6DBC8',
                         fontFamily: "irish_grover",
                     },
-                    tabBarIcon: () => <Entypo name="bowl" color='#363232' size={28} />,
+                    tabBarIcon: ({ focused }) => (
+                        <Entypo name="bowl" color={focused ? '#000' : '#585555'} size={28} />
+                    ),
                 }}
             />
             <Tabs.Screen
@@ -81,8 +83,8 @@ const TabLayout = () => {
                     tabBarLabelStyle: {
                         fontSize: 14,
                     },
-                    tabBarIcon: () => (
-                        <MaterialCommunityIcons name="account" color='#363232' size={32} />
+                    tabBarIcon: ({ focused }) => (
+                        <MaterialCommunityIcons name="account" color={focused ? '#000' : '#585555'} size={32} />
                     ),
                     headerRight: () => (
                         <TouchableOpacity onPress={signOut}>

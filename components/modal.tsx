@@ -1,7 +1,7 @@
-import React from 'react'
-import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useState } from 'react'
+import { Modal, Pressable, ScrollView, StyleSheet, Text, View, Switch } from "react-native";
 import { Feather } from '@expo/vector-icons';
-import { Fontisto } from '@expo/vector-icons';
+import Diet from './dietSelect';
 
 
 interface ModalComponentProps {
@@ -10,6 +10,9 @@ interface ModalComponentProps {
 }
 
 export default function ModalComponent({ modalVisible, setModalVisible }: ModalComponentProps) {
+
+    const [isVitality, setIsVitality] = useState(false);
+
 
     return (
         <Modal
@@ -43,7 +46,8 @@ export default function ModalComponent({ modalVisible, setModalVisible }: ModalC
                     <ScrollView style={styles.filterContainer}>
                         <View style={styles.diet}>
                             <Text style={styles.modalText}>Dietary Requirements:</Text>
-                            <Text style={styles.dietText}>Gluten Free, Vegan</Text>
+                            {/* <Text style={styles.dietText}>Gluten Free, Vegan</Text> */}
+                            <Diet />
                         </View>
 
                         <View
@@ -54,8 +58,10 @@ export default function ModalComponent({ modalVisible, setModalVisible }: ModalC
                         />
 
                         <View style={styles.vitality}>
-                            <Text style={styles.modalText}>Are you a Vitality member?</Text>
-                            <Fontisto name="toggle-off" size={30} color="black" />
+
+                            <Text style={styles.modalText}>Are you a Vitality Member?</Text>
+                            <Switch value={isVitality} onValueChange={() => setIsVitality((previousState) => !previousState)} trackColor={{ false: "", true: "#E6DBC8" }} />
+
                         </View>
 
                         <View
@@ -117,16 +123,16 @@ const styles = StyleSheet.create({
     diet: {
         paddingVertical: 25,
     },
-    dietText: {
-        paddingHorizontal: 15,
-        paddingTop: 20,
-        fontFamily: 'imprima',
-        fontSize: 18,
-        color: '#363232',
-    },
+    // dietText: {
+    //     paddingHorizontal: 15,
+    //     paddingTop: 20,
+    //     fontFamily: 'imprima',
+    //     fontSize: 18,
+    //     color: '#363232',
+    // },
     vitality: {
         paddingVertical: 25,
-        paddingRight: 40,
+        paddingRight: 15,
         flexDirection: 'row',
         justifyContent: "space-between",
     }
