@@ -2,10 +2,14 @@ import { Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View 
 import { TextInput } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from "react";
+import ModalComponent from '../../components/modal';
 
 const filterImage = require('/Users/kellysmulian/GitHub/munchr-app/assets/images/filter.png');
 
 export default function TabOneScreen() {
+
+    // modal
+    const [modalVisible, setModalVisible] = useState(false);
 
     const [showFullRecipe, setShowFullRecipe] = useState(false);
     const [showShoppingList, setShowShoppingList] = useState(false);
@@ -22,8 +26,10 @@ export default function TabOneScreen() {
 
     const shopping = "boneless, skinless chicken breasts \nolive oil \nlemons \ngarlic \ndried oregano \ndried thyme \npaprika \nsalt and black pepper \nparsley or cilantro";
 
+
     return (
         <View style={styles.container}>
+
             <ScrollView style={styles.scrollView}>
                 <View style={styles.outputContainer}>
                     <Text style={styles.outputHeading}>Grilled Lemon Herb Chicken</Text>
@@ -43,12 +49,10 @@ export default function TabOneScreen() {
                         )}
                     </TouchableOpacity>
 
-
-
                     <TouchableOpacity style={styles.toggleBlock} onPress={toggleShoppingList}>
                         <View style={styles.buttonContainer}>
                             <Text style={[styles.buttonText, showShoppingList ? styles.underline : {}]}>
-                                {showShoppingList ? 'Shopping List' : 'Shopping List'}
+                                Shopping List
                             </Text>
                             <AntDesign name={showShoppingList ? 'up' : 'down'} size={24} color="black" />
                         </View>
@@ -64,8 +68,12 @@ export default function TabOneScreen() {
                 </View>
             </ScrollView >
 
+
+            <ModalComponent modalVisible={modalVisible} setModalVisible={setModalVisible} />
+
+
             <View style={styles.inputContainer}>
-                <Pressable>
+                <Pressable onPress={() => setModalVisible(true)}>
                     {({ pressed }) => (
                         <Image style={{ opacity: pressed ? 0.5 : 1, height: 45, width: 40, marginBottom: 20, marginTop: 10 }} source={filterImage} />
                     )}
@@ -95,12 +103,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginHorizontal: '4%',
         marginVertical: '5%',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.8,
-        shadowRadius: 1,
         borderRadius: 6,
-        overflow: 'scroll',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
     },
     outputHeading: {
         fontSize: 22,
@@ -146,11 +157,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        // marginBottom: 20,
-        // backgroundColor: '#EDF0F6',
     },
     userInput: {
-        // height: 50,
         borderWidth: 1,
         borderColor: "#E6DBC8",
         borderRadius: 4,
@@ -210,5 +218,5 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-    }
+    },
 });
