@@ -86,7 +86,7 @@ const TabLayout = () => {
                     ),
                     headerRight: () => (
                         <TouchableOpacity onPress={signOut}>
-                            <Ionicons name="log-out-outline" size={30} color={'#585555'} />
+                            <Ionicons name="log-out-outline" size={30} color={'#585555'} marginRight={20} />
                         </TouchableOpacity>
                     ),
                 }}
