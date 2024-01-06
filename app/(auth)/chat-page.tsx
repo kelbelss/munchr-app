@@ -24,7 +24,7 @@ export default function TabOneScreen() {
 
     const recipe = "Instructions: \n\nPrepare the Marinade:\n\n 1. In a bowl, whisk together olive oil, fresh lemon juice, minced garlic, dried oregano, dried thyme, paprika, salt, and black pepper.\n2. Marinate the Chicken: \n3. Place the chicken breasts in a resealable plastic bag or a shallow dish.\n4. Pour the marinade over the chicken, ensuring that each piece is well-coated.\n5. Seal the bag or cover the dish and refrigerate for at least 30 minutes to marinate. For more flavor, you can marinate it for a few hours or overnight.\n\nPreheat the Grill";
 
-    const shopping = "boneless, skinless chicken breasts \nolive oil \nlemons \ngarlic \ndried oregano \ndried thyme \npaprika \nsalt and black pepper \nparsley or cilantro";
+    const shopping = "6 boneless, skinless chicken breasts \n1 tbsp olive oil \n1 tbsp lemon juice \n1 clove garlic \n1/2 tsp dried oregano \n1/2 tsp dried thyme \n1/2 tsp paprika \n1/2 tsp salt and black pepper \nparsley or cilantro";
 
 
     return (
