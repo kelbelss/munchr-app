@@ -46,7 +46,7 @@ export default function ModalComponent({ modalVisible, setModalVisible }: ModalC
                     <ScrollView style={styles.filterContainer}>
                         <View style={styles.diet}>
                             <Text style={styles.modalText}>Dietary Requirements:</Text>
-                            {/* <Text style={styles.dietText}>Gluten Free, Vegan</Text> */}
+
                             <Diet />
                         </View>
 
@@ -59,7 +59,7 @@ export default function ModalComponent({ modalVisible, setModalVisible }: ModalC
 
                         <View style={styles.vitality}>
 
-                            <Text style={styles.modalText}>Are you a Vitality Member?</Text>
+                            <Text style={styles.modalText}>Are you a Vitality Member?  </Text>
                             <Switch value={isVitality} onValueChange={() => setIsVitality((previousState) => !previousState)} trackColor={{ false: "", true: "#E6DBC8" }} />
 
                         </View>
@@ -123,13 +123,6 @@ const styles = StyleSheet.create({
     diet: {
         paddingVertical: 25,
     },
-    // dietText: {
-    //     paddingHorizontal: 15,
-    //     paddingTop: 20,
-    //     fontFamily: 'imprima',
-    //     fontSize: 18,
-    //     color: '#363232',
-    // },
     vitality: {
         paddingVertical: 25,
         paddingRight: 15,
