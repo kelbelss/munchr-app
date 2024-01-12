@@ -75,7 +75,7 @@ export default function TabOneScreen() {
             <View style={styles.inputContainer}>
                 <Pressable onPress={() => setModalVisible(true)}>
                     {({ pressed }) => (
-                        <Image style={{ opacity: pressed ? 0.5 : 1, height: 45, width: 40, marginBottom: 20, marginTop: 10 }} source={filterImage} />
+                        <Image style={{ opacity: pressed ? 0.5 : 1, height: 45, width: 40, marginTop: 32 }} source={filterImage} />
                     )}
                 </Pressable>
                 <TextInput autoCapitalize="none" placeholder="Ask Munchr" style={styles.userInput} />
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         flex: 1,
-        maxHeight: '88%',
+        maxHeight: '90%',
     },
     outputContainer: {
         flex: 1,
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         width: '100%',
-        height: 80,
+        height: '15%',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -168,11 +168,9 @@ const styles = StyleSheet.create({
         fontFamily: 'imprima',
         fontSize: 18,
         marginHorizontal: 5,
-        width: 245,
+        width: '60%',
         marginLeft: 10,
-        marginTop: 10,
-        marginBottom: 20,
-
+        marginTop: 32,
     },
     button: {
         backgroundColor: "#E6DBC8",
@@ -182,8 +180,7 @@ const styles = StyleSheet.create({
         borderColor: "#E6DBC8",
         fontFamily: 'imprima',
         fontSize: 18,
-        marginBottom: 20,
-        marginTop: 10,
+        marginTop: 32,
     },
     toggleBlock: {
         alignItems: 'center',
