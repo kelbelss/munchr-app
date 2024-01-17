@@ -87,11 +87,11 @@ const TabLayout = () => {
                         fontSize: 14,
                     },
                     tabBarIcon: ({ focused }) => (
-                        <MaterialCommunityIcons name="account" color={focused ? '#77dd77' : '#585555'} size={32} />
+                        <MaterialCommunityIcons name="account" color={focused ? '#baa582' : '#585555'} size={32} />
                     ),
                     headerRight: () => (
                         <TouchableOpacity onPress={signOut}>
-                            <Ionicons name="log-out-outline" size={30} color={'#585555'} marginRight={20} />
+                            <Ionicons name="log-out-outline" size={30} color={'#baa582'} marginRight={20} />
                         </TouchableOpacity>
                     ),
                 }}

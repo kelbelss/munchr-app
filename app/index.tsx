@@ -74,7 +74,7 @@ const Login = () => {
 
             <Text style={styles.header}>MUNCHR</Text>
 
-            <Image style={styles.logo} source={require('../assets/images/icon.svg')} />
+            <Image style={styles.logo} source={require('../assets/images/icon.png')} />
 
             <TextInput autoCapitalize="none" placeholder="gavin@hooli.com" value={email} onChangeText={setEmail} style={styles.inputField} />
             <TextInput autoCapitalize="none" placeholder="password" value={password} onChangeText={setPassword} secureTextEntry style={styles.inputField} />
