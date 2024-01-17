@@ -6,6 +6,7 @@ export default function Diet() {
     const [isGlutenFree, setGlutenFree] = useState(false);
     const [isVegan, setVegan] = useState(false);
     const [isEggFree, setEggFree] = useState(false);
+    const [isHalaal, setHalaal] = useState(false);
 
     return (
         <View style={styles.container}>
@@ -14,7 +15,7 @@ export default function Diet() {
                     style={styles.checkbox}
                     value={isGlutenFree}
                     onValueChange={setGlutenFree}
-                    color={isGlutenFree ? '#E6DBC8' : undefined}
+                    color={isGlutenFree ? '#77dd77' : undefined}
                 />
                 <Text style={styles.paragraph}>Gluten free</Text>
             </View>
@@ -23,7 +24,7 @@ export default function Diet() {
                     style={styles.checkbox}
                     value={isVegan}
                     onValueChange={setVegan}
-                    color={isVegan ? '#E6DBC8' : undefined}
+                    color={isVegan ? '#77dd77' : undefined}
                 />
                 <Text style={styles.paragraph}>Vegan</Text>
             </View>
@@ -32,9 +33,18 @@ export default function Diet() {
                     style={styles.checkbox}
                     value={isEggFree}
                     onValueChange={setEggFree}
-                    color={isEggFree ? '#E6DBC8' : undefined}
+                    color={isEggFree ? '#77dd77' : undefined}
                 />
                 <Text style={styles.paragraph}>Egg free</Text>
+            </View>
+            <View style={styles.section}>
+                <Checkbox
+                    style={styles.checkbox}
+                    value={isHalaal}
+                    onValueChange={setHalaal}
+                    color={isHalaal ? '#77dd77' : undefined}
+                />
+                <Text style={styles.paragraph}>Halaal</Text>
             </View>
         </View>
     );
