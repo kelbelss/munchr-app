@@ -18,7 +18,6 @@ const Login = () => {
                 'imprima': require('../assets/fonts/imprima.ttf'),
             });
         }
-
         loadCustomFont();
     }, []);
 
@@ -75,7 +74,7 @@ const Login = () => {
 
             <Text style={styles.header}>MUNCHR</Text>
 
-            <Image style={styles.logo} source={require('../assets/images/icon.png')} />
+            <Image style={styles.logo} source={require('../assets/images/icon.svg')} />
 
             <TextInput autoCapitalize="none" placeholder="gavin@hooli.com" value={email} onChangeText={setEmail} style={styles.inputField} />
             <TextInput autoCapitalize="none" placeholder="password" value={password} onChangeText={setPassword} secureTextEntry style={styles.inputField} />
@@ -114,6 +113,9 @@ const styles = StyleSheet.create({
         marginTop: 60,
         marginBottom: 12,
         color: "#E6DBC8",
+        textShadowColor: '#baa582',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 0.5,
     },
     logo: {
         height: 180,
