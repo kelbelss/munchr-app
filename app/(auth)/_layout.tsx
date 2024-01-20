@@ -55,7 +55,7 @@ const TabLayout = () => {
                 tabBarStyle: {
                     backgroundColor: '#EDF0F6',
                 },
-                tabBarActiveTintColor: '#baa582', // Active tab text color
+                tabBarActiveTintColor: '#363232', // Active tab text color
                 tabBarInactiveTintColor: '#585555',
             }}
         >
@@ -75,7 +75,7 @@ const TabLayout = () => {
                         textShadowRadius: 0.5,
                     },
                     tabBarIcon: ({ focused }) => (
-                        <Entypo name="bowl" color={focused ? '#baa582' : '#585555'} size={28} />
+                        <Entypo name="bowl" color={focused ? '#363232' : '#585555'} size={28} />
                     ),
                 }}
             />
@@ -87,11 +87,11 @@ const TabLayout = () => {
                         fontSize: 14,
                     },
                     tabBarIcon: ({ focused }) => (
-                        <MaterialCommunityIcons name="account" color={focused ? '#baa582' : '#585555'} size={32} />
+                        <MaterialCommunityIcons name="account" color={focused ? '#363232' : '#585555'} size={32} />
                     ),
                     headerRight: () => (
                         <TouchableOpacity onPress={signOut}>
-                            <Ionicons name="log-out-outline" size={30} color={'#baa582'} marginRight={20} />
+                            <Ionicons name="log-out-outline" size={30} color={'#363232'} marginRight={20} />
                         </TouchableOpacity>
                     ),
                 }}
