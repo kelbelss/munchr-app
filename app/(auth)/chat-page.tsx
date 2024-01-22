@@ -3,6 +3,8 @@ import { TextInput } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from "react";
 import ModalComponent from '../../components/modal';
+import { useNavigation } from '@react-navigation/native';
+import { useShoppingList } from "./shoppingListContext";
 
 const filterImage = require('/Users/kellysmulian/GitHub/munchr-app/assets/images/filter.png');
 
@@ -22,6 +24,11 @@ export default function TabOneScreen() {
         setShowShoppingList(!showShoppingList);
     };
 
+    const { setShoppingList } = useShoppingList();
+
+
+
+
 
     const heading = "Grilled Lemon Herb Chicken"
 
@@ -31,7 +38,19 @@ export default function TabOneScreen() {
 
     const shopping = "6 boneless, skinless chicken breasts \n1 tbsp olive oil \n1 tbsp lemon juice \n1 clove garlic \n1/2 tsp dried oregano \n1/2 tsp dried thyme \n1/2 tsp paprika \n1/2 tsp salt and black pepper \nparsley or cilantro";
 
+    const items = shopping.split('\n');
 
+    const itemsWithPlusSign = items.map((item, index) => (
+        <View key={index} style={styles.itemContainer}>
+            <Text style={styles.buttonText}>{item}</Text>
+            <AntDesign
+                name='plus'
+                size={22}
+                color="black"
+                onPress={() => setShoppingList(prevList => [...prevList, item])}
+            />
+        </View>
+    ));
 
 
     return (
@@ -65,7 +84,8 @@ export default function TabOneScreen() {
                         </View>
                         {showShoppingList && (
                             <View style={styles.expandedBlock}>
-                                <Text style={styles.buttonText}>{shopping}</Text>
+                                {/* <Text style={styles.buttonText}>{items}</Text> */}
+                                {itemsWithPlusSign}
                             </View>
                         )}
 
@@ -217,6 +237,17 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         marginTop: 10,
         width: '100%',
+    },
+    itemContainer: {
+        backgroundColor: '#F3F2F0',
+        padding: 8,
+        borderRadius: 4,
+        marginTop: 10,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     buttonContainer: {
         flexDirection: 'row',
