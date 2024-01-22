@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useShoppingList } from "./shoppingListContext";
 import Icon from 'react-native-vector-icons/Ionicons';
 import Checkbox from 'expo-checkbox';
+import { Entypo } from '@expo/vector-icons';
 
 
 
@@ -39,15 +40,16 @@ const ShoppingList = () => {
                     {shoppingList.length === 0 && <Text style={styles.buttonText}>Add Items to your Shopping List</Text>}
                     {shoppingList.map((item, index) => (
                         <View key={index} style={styles.itemContainer}>
-                            <Checkbox
-                                style={styles.checkbox}
-                                value={!!markedItems[item]}
-                                onValueChange={() => markAsDone(item)}
-                                color={!!markedItems[item] ? '#77dd77' : undefined}
-                            />
-                            <Text>{item}</Text>
-                            {/* <Icon name="checkmark-circle" size={24} color={markedItems.includes(item) ? "green" : "grey"} onPress={() => markAsDone(item)} /> */}
-                            <Icon name="trash-bin" size={24} color="red" onPress={() => removeFromList(item)} />
+                            <View style={styles.checkText}>
+                                <Checkbox
+                                    style={styles.checkbox}
+                                    value={!!markedItems[item]}
+                                    onValueChange={() => markAsDone(item)}
+                                    color={!!markedItems[item] ? '#77dd77' : undefined}
+                                />
+                                <Text style={styles.shoppingList}>{item}</Text>
+                            </View>
+                            <Entypo name="cross" size={26} color="grey" onPress={() => removeFromList(item)} />
                         </View>
                     ))}
                 </View>
@@ -74,10 +76,9 @@ const styles = StyleSheet.create({
     outputContainer: {
         flex: 1,
         backgroundColor: '#F3F2F0',
-        width: '92%',
+        width: '96%',
         height: 'auto',
-        alignItems: 'center',
-        marginHorizontal: '4%',
+        marginHorizontal: '2%',
         marginVertical: '5%',
         borderRadius: 6,
         shadowColor: "#000",
@@ -88,24 +89,36 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
-    },
-    buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        padding: '2%',
     },
     buttonText: {
         color: '#363232',
         fontFamily: 'imprima',
         fontSize: 18,
+        paddingTop: 20,
+        paddingBottom: 20,
+        textAlign: 'center',
+    },
+    shoppingList: {
+        color: '#363232',
+        fontFamily: 'imprima',
+        fontSize: 18,
+        paddingTop: 10,
+        paddingBottom: 10,
     },
     checkbox: {
         margin: 8,
         color: "black",
     },
-    itemContainer: {
+    checkText: {
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    itemContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 10,
     },
 
 })
