@@ -60,7 +60,7 @@ export default function ModalComponent({ modalVisible, setModalVisible }: ModalC
                         <View style={styles.vitality}>
 
                             <Text style={styles.modalText}>Are you a Vitality Member?  </Text>
-                            <Switch value={isVitality} onValueChange={() => setIsVitality((previousState) => !previousState)} trackColor={{ false: "", true: "#E6DBC8" }} />
+                            <Switch value={isVitality} onValueChange={() => setIsVitality((previousState) => !previousState)} trackColor={{ false: "", true: "#77dd77" }} />
 
                         </View>
 

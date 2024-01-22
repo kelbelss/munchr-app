@@ -18,7 +18,6 @@ const Login = () => {
                 'imprima': require('../assets/fonts/imprima.ttf'),
             });
         }
-
         loadCustomFont();
     }, []);
 
@@ -114,6 +113,9 @@ const styles = StyleSheet.create({
         marginTop: 60,
         marginBottom: 12,
         color: "#E6DBC8",
+        textShadowColor: '#baa582',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 0.5,
     },
     logo: {
         height: 180,
