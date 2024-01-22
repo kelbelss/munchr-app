@@ -4,6 +4,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Entypo, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import TabOneScreen from './chat-page';
+import { Octicons } from '@expo/vector-icons';
 
 
 // Simple stack layout within the authenticated area
@@ -62,7 +63,7 @@ const TabLayout = () => {
             <Tabs.Screen
                 name="chat-page"
                 options={{
-                    title: "MUNCHR",
+                    title: "Munchr",
                     tabBarLabelStyle: {
                         fontSize: 14,
                     },
@@ -73,9 +74,22 @@ const TabLayout = () => {
                         textShadowColor: '#baa582',
                         textShadowOffset: { width: 1, height: 1 },
                         textShadowRadius: 0.5,
+                        textTransform: 'uppercase',
                     },
                     tabBarIcon: ({ focused }) => (
                         <Entypo name="bowl" color={focused ? '#363232' : '#585555'} size={28} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="shopping-list"
+                options={{
+                    title: "Shopping List",
+                    tabBarLabelStyle: {
+                        fontSize: 14,
+                    },
+                    tabBarIcon: ({ focused }) => (
+                        <Octicons name="checklist" size={24} color={focused ? '#363232' : '#585555'} />
                     ),
                 }}
             />
