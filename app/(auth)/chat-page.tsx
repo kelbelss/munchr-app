@@ -22,9 +22,16 @@ export default function TabOneScreen() {
         setShowShoppingList(!showShoppingList);
     };
 
+
+    const heading = "Grilled Lemon Herb Chicken"
+
+    const description = "This Grilled Lemon Herb Chicken is not only gluten-free but also low in fat high in protein."
+
     const recipe = "Instructions: \n\nPrepare the Marinade:\n\n 1. In a bowl, whisk together olive oil, fresh lemon juice, minced garlic, dried oregano, dried thyme, paprika, salt, and black pepper.\n2. Marinate the Chicken: \n3. Place the chicken breasts in a resealable plastic bag or a shallow dish.\n4. Pour the marinade over the chicken, ensuring that each piece is well-coated.\n5. Seal the bag or cover the dish and refrigerate for at least 30 minutes to marinate. For more flavor, you can marinate it for a few hours or overnight.\n\nPreheat the Grill";
 
     const shopping = "6 boneless, skinless chicken breasts \n1 tbsp olive oil \n1 tbsp lemon juice \n1 clove garlic \n1/2 tsp dried oregano \n1/2 tsp dried thyme \n1/2 tsp paprika \n1/2 tsp salt and black pepper \nparsley or cilantro";
+
+
 
 
     return (
@@ -32,8 +39,8 @@ export default function TabOneScreen() {
 
             <ScrollView style={styles.scrollView}>
                 <View style={styles.outputContainer}>
-                    <Text style={styles.outputHeading}>Grilled Lemon Herb Chicken</Text>
-                    <Text style={styles.outputSummary}>This Grilled Lemon Herb Chicken is not only gluten-free but also low in fat high in protein.</Text>
+                    <Text style={styles.outputHeading}>{heading}</Text>
+                    <Text style={styles.outputSummary}>{description}</Text>
 
                     <TouchableOpacity style={styles.toggleBlock} onPress={toggleFullRecipe}>
                         <View style={styles.buttonContainer}>
@@ -126,29 +133,29 @@ const styles = StyleSheet.create({
         color: '#585555',
         fontFamily: 'imprima',
     },
-    fullRecipeBlock: {
-        alignItems: "center",
-        borderWidth: 1,
-        borderColor: "#E6DBC8",
-        padding: 8,
-        borderRadius: 4,
-        marginBottom: 5,
-        marginTop: 10,
-        width: '90%',
-        flexDirection: "row",
-        justifyContent: 'center',
-    },
-    shoppingListBlock: {
-        alignItems: "center",
-        borderWidth: 1,
-        borderColor: "#E6DBC8",
-        padding: 8,
-        borderRadius: 4,
-        marginBottom: 10,
-        width: '90%',
-        flexDirection: "row",
-        justifyContent: 'center',
-    },
+    // fullRecipeBlock: {
+    //     alignItems: "center",
+    //     borderWidth: 1,
+    //     borderColor: "#E6DBC8",
+    //     padding: 8,
+    //     borderRadius: 4,
+    //     marginBottom: 5,
+    //     marginTop: 10,
+    //     width: '90%',
+    //     flexDirection: "row",
+    //     justifyContent: 'center',
+    // },
+    // shoppingListBlock: {
+    //     alignItems: "center",
+    //     borderWidth: 1,
+    //     borderColor: "#E6DBC8",
+    //     padding: 8,
+    //     borderRadius: 4,
+    //     marginBottom: 10,
+    //     width: '90%',
+    //     flexDirection: "row",
+    //     justifyContent: 'center',
+    // },
     inputContainer: {
         position: 'absolute',
         bottom: 0,
