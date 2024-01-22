@@ -1,6 +1,7 @@
 import { Slot, Stack, useRouter, useSegments } from 'expo-router';
 import { useEffect } from 'react';
 import { AuthProvider, useAuth } from '../provider/AuthProvider';
+import { ShoppingListProvider } from './(auth)/shoppingListContext';
 
 // Makes sure the user is authenticated before accessing protected pages
 const InitialLayout = () => {
@@ -30,7 +31,9 @@ const InitialLayout = () => {
 const RootLayout = () => {
     return (
         <AuthProvider>
-            <InitialLayout />
+            <ShoppingListProvider>
+                <InitialLayout />
+            </ShoppingListProvider>
         </AuthProvider>
     );
 };
