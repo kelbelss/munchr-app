@@ -36,13 +36,13 @@ export default function TabOneScreen() {
 
     const recipe = "Instructions: \n\nPrepare the Marinade:\n\n 1. In a bowl, whisk together olive oil, fresh lemon juice, minced garlic, dried oregano, dried thyme, paprika, salt, and black pepper.\n2. Marinate the Chicken: \n3. Place the chicken breasts in a resealable plastic bag or a shallow dish.\n4. Pour the marinade over the chicken, ensuring that each piece is well-coated.\n5. Seal the bag or cover the dish and refrigerate for at least 30 minutes to marinate. For more flavor, you can marinate it for a few hours or overnight.\n\nPreheat the Grill";
 
-    const shopping = "6 boneless, skinless chicken breasts \n1 tbsp olive oil \n1 tbsp lemon juice \n1 clove garlic \n1/2 tsp dried oregano \n1/2 tsp dried thyme \n1/2 tsp paprika \n1/2 tsp salt and black pepper \nparsley or cilantro";
+    const shopping = "6 boneless, skinless chicken breasts\n1 tbsp olive oil\n1 tbsp lemon juice\n1 clove garlic\n1/2 tsp dried oregano\n1/2 tsp dried thyme\n1/2 tsp paprika \n1/2 tsp salt and black pepper\nparsley or cilantro";
 
     const items = shopping.split('\n');
 
     const itemsWithPlusSign = items.map((item, index) => (
         <View key={index} style={styles.itemContainer}>
-            <Text style={styles.buttonText}>{item}</Text>
+            <Text style={styles.shoppingListText}>{item}</Text>
             <AntDesign
                 name='plus'
                 size={22}
@@ -84,7 +84,6 @@ export default function TabOneScreen() {
                         </View>
                         {showShoppingList && (
                             <View style={styles.expandedBlock}>
-                                {/* <Text style={styles.buttonText}>{items}</Text> */}
                                 {itemsWithPlusSign}
                             </View>
                         )}
@@ -126,9 +125,9 @@ const styles = StyleSheet.create({
     outputContainer: {
         flex: 1,
         backgroundColor: '#F3F2F0',
-        width: '92%',
+        width: '96%',
         alignItems: 'center',
-        marginHorizontal: '4%',
+        marginHorizontal: '2%',
         marginVertical: '5%',
         borderRadius: 6,
         shadowColor: "#000",
@@ -216,13 +215,19 @@ const styles = StyleSheet.create({
         padding: 8,
         borderRadius: 4,
         marginBottom: 10,
-        width: '90%',
+        width: '94%',
     },
     buttonText: {
         color: '#363232',
         fontFamily: 'imprima',
         fontSize: 18,
         marginRight: 20,
+    },
+    shoppingListText: {
+        color: '#363232',
+        fontFamily: 'imprima',
+        fontSize: 18,
+        marginRight: "1%",
     },
     underline: {
         color: '#363232',
@@ -233,7 +238,7 @@ const styles = StyleSheet.create({
     },
     expandedBlock: {
         backgroundColor: '#F3F2F0',
-        padding: 8,
+        padding: 4,
         borderRadius: 4,
         marginTop: 10,
         width: '100%',
