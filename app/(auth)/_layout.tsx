@@ -51,6 +51,7 @@ const TabLayout = () => {
                     title: "Shopping List",
                     tabBarLabelStyle: {
                         fontSize: 12,
+                        marginBottom: -3,
                     },
                     headerTitleStyle: {
                         fontFamily: 'imprima',
@@ -73,6 +74,7 @@ const TabLayout = () => {
                     title: "My Account",
                     tabBarLabelStyle: {
                         fontSize: 12,
+                        marginBottom: -2,
                     },
                     headerTitleStyle: {
                         fontFamily: 'imprima',
