@@ -28,13 +28,13 @@ export default function TabOneScreen() {
 
 
 
-
+    const space = "\n\n"
 
     const heading = "Grilled Lemon Herb Chicken"
 
     const description = "This Grilled Lemon Herb Chicken is not only gluten-free but also low in fat high in protein."
 
-    const recipe = "Instructions: \n\nPrepare the Marinade:\n\n 1. In a bowl, whisk together olive oil, fresh lemon juice, minced garlic, dried oregano, dried thyme, paprika, salt, and black pepper.\n2. Marinate the Chicken: \n3. Place the chicken breasts in a resealable plastic bag or a shallow dish.\n4. Pour the marinade over the chicken, ensuring that each piece is well-coated.\n5. Seal the bag or cover the dish and refrigerate for at least 30 minutes to marinate. For more flavor, you can marinate it for a few hours or overnight.\n\nPreheat the Grill";
+    const recipe = "Prepare the Marinade:\n\n 1. In a bowl, whisk together olive oil, fresh lemon juice, minced garlic, dried oregano, dried thyme, paprika, salt, and black pepper.\n\nMarinate the Chicken: \n\n2. Place the chicken breasts in a resealable plastic bag or a shallow dish.\n\n3. Pour the marinade over the chicken, ensuring that each piece is well-coated.\n\n4. Seal the bag or cover the dish and refrigerate for at least 30 minutes to marinate. For more flavor, you can marinate it for a few hours or overnight.\n\nPreheat the Grill";
 
     const shopping = "6 boneless, skinless chicken breasts\n1 tbsp olive oil\n1 tbsp lemon juice\n1 clove garlic\n1/2 tsp dried oregano\n1/2 tsp dried thyme\n1/2 tsp paprika \n1/2 tsp salt and black pepper\nparsley or cilantro";
 
@@ -70,7 +70,7 @@ export default function TabOneScreen() {
                         </View>
                         {showFullRecipe && (
                             <View style={styles.expandedBlock}>
-                                <Text style={styles.buttonText}>{recipe}</Text>
+                                <Text style={styles.buttonTextRec}>Ingredients: {space}{shopping}{space}{space}Instructions:{space}{recipe}</Text>
                             </View>
                         )}
                     </TouchableOpacity>
@@ -223,6 +223,13 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginRight: 20,
     },
+    buttonTextRec: {
+        color: '#363232',
+        fontFamily: 'imprima',
+        fontSize: 18,
+        marginRight: 20,
+        textAlign: "justify",
+    },
     shoppingListText: {
         color: '#363232',
         fontFamily: 'imprima',
@@ -238,10 +245,11 @@ const styles = StyleSheet.create({
     },
     expandedBlock: {
         backgroundColor: '#F3F2F0',
-        padding: 4,
+        padding: 6,
         borderRadius: 4,
         marginTop: 10,
         width: '100%',
+        marginRight: '-4%'
     },
     itemContainer: {
         backgroundColor: '#F3F2F0',
