@@ -33,14 +33,12 @@ const ShoppingList = () => {
         setMarkedItems(prevMarkedItems => ({ ...prevMarkedItems, [item]: !prevMarkedItems[item] }));
     };
 
-    // Modal
-
-
     const submitItem = (item: string) => {
         if (item.trim() !== "") {
             setShoppingList(prevList => [...prevList, item]);
             setMarkedItems(prevMarkedItems => ({ ...prevMarkedItems, [item]: false }));
             setIsModalVisible(false);
+            setCurrentInput("");
         }
     };
 
@@ -84,7 +82,10 @@ const ShoppingList = () => {
                         <View style={styles.modalHeader}>
 
                             <Pressable
-                                onPress={() => setIsModalVisible(!isModalVisible)}
+                                onPress={() => {
+                                    setIsModalVisible(!isModalVisible);
+                                    setCurrentInput("");
+                                }}
                             >
                                 <Feather name="arrow-left" size={28} color="black" />
                             </Pressable>
