@@ -149,8 +149,8 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#363232',
         fontFamily: 'imprima',
-        fontSize: 18,
-        paddingTop: 20,
+        fontSize: 20,
+        paddingTop: "3%",
         paddingBottom: 20,
         textAlign: 'center',
     },
@@ -177,13 +177,15 @@ const styles = StyleSheet.create({
     },
     buttonAdd: {
         backgroundColor: "#E6DBC8",
-        padding: 12,
+        padding: 8,
         borderRadius: 4,
         borderWidth: 1,
         borderColor: "#E6DBC8",
         fontFamily: 'imprima',
         fontSize: 18,
         alignItems: 'center',
+        marginHorizontal: "30%",
+        marginBottom: "2%",
     },
     buttonContainer: {
         flex: 1,
