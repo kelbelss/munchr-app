@@ -1,14 +1,17 @@
-import { Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useRoute } from '@react-navigation/native';
-import { useState, useEffect } from "react";
+import { ScrollView, StyleSheet, Text, View, Modal, Button, Alert, Pressable } from "react-native";
+import { useState } from "react";
 import { useShoppingList } from "./shoppingListContext";
-import Icon from 'react-native-vector-icons/Ionicons';
 import Checkbox from 'expo-checkbox';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, Feather } from '@expo/vector-icons';
+import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 
 
 
 const ShoppingList = () => {
+
+    // Modal
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [currentInput, setCurrentInput] = useState("");
 
     const { shoppingList, setShoppingList } = useShoppingList();
     const [markedItems, setMarkedItems] = useState<Record<string, boolean>>({});
@@ -22,22 +25,32 @@ const ShoppingList = () => {
         });
     };
 
-    const addItemToList = (item: string) => {
-        setShoppingList(prevList => [...prevList, item]);
-        setMarkedItems(prevMarkedItems => ({ ...prevMarkedItems, [item]: false }));
+    const addItemToList = () => {
+        setIsModalVisible(true);
     };
 
     const markAsDone = (item: string) => {
         setMarkedItems(prevMarkedItems => ({ ...prevMarkedItems, [item]: !prevMarkedItems[item] }));
     };
 
+    // Modal
+
+
+    const submitItem = (item: string) => {
+        if (item.trim() !== "") {
+            setShoppingList(prevList => [...prevList, item]);
+            setMarkedItems(prevMarkedItems => ({ ...prevMarkedItems, [item]: false }));
+            setIsModalVisible(false);
+        }
+    };
+
     return (
 
-        // <Text>Shopping List</Text>
         <View style={styles.container}>
             <ScrollView style={styles.scrollView}>
                 <View style={styles.outputContainer}>
-                    {shoppingList.length === 0 && <Text style={styles.buttonText}>Add Items to your Shopping List</Text>}
+                    {shoppingList.length === 0 && <Text style={styles.buttonText}>Add Items From Munchr Recipe</Text>}
+
                     {shoppingList.map((item, index) => (
                         <View key={index} style={styles.itemContainer}>
                             <View style={styles.checkText}>
@@ -52,8 +65,49 @@ const ShoppingList = () => {
                             <Entypo name="cross" size={26} color="grey" onPress={() => removeFromList(item)} />
                         </View>
                     ))}
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity style={styles.buttonAdd} onPress={addItemToList}>
+                            <Text style={{ color: '#363232', fontFamily: 'imprima', fontSize: 18 }}>Add New Items</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </ScrollView>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={isModalVisible}
+                onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                }}>
+                <View style={styles.modalCenteredView}>
+                    <View style={styles.modalView}>
+                        <View style={styles.modalHeader}>
+
+                            <Pressable
+                                onPress={() => setIsModalVisible(!isModalVisible)}
+                            >
+                                <Feather name="arrow-left" size={28} color="black" />
+                            </Pressable>
+
+                            <Text style={styles.modalHeaderText}>Enter Ingredients</Text>
+                        </View>
+
+                        <View
+                            style={{
+                                borderBottomColor: '#585555',
+                                borderBottomWidth: StyleSheet.hairlineWidth,
+                            }}
+                        />
+                        <View style={styles.inputContainer}>
+                            <TextInput style={styles.modalInput} placeholder="Add to Shopping List" value={currentInput} onChangeText={setCurrentInput} />
+
+                            <TouchableOpacity style={styles.button} onPress={() => submitItem(currentInput)}>
+                                <Text style={{ color: '#363232', fontFamily: 'imprima', fontSize: 18 }}>Add</Text>
+                            </TouchableOpacity></View>
+                    </View>
+
+                </View>
+            </Modal>
 
         </View>
 
@@ -71,7 +125,7 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         flex: 1,
-        maxHeight: '90%',
+        maxHeight: '100%',
     },
     outputContainer: {
         flex: 1,
@@ -119,6 +173,82 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 10,
+    },
+    buttonAdd: {
+        backgroundColor: "#E6DBC8",
+        padding: 12,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: "#E6DBC8",
+        fontFamily: 'imprima',
+        fontSize: 18,
+        alignItems: 'center',
+    },
+    buttonContainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+    },
+    modalCenteredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22,
+    },
+    modalView: {
+        width: '92%',
+        height: '88%',
+        margin: 20,
+        backgroundColor: "#F3F2F0",
+        borderRadius: 6,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    modalHeader: {
+        flexDirection: 'row',
+        padding: 25,
+    },
+    modalHeaderText: {
+        color: '#000000',
+        fontFamily: 'imprima',
+        fontSize: 26,
+        marginLeft: 54,
+    },
+    inputContainer: {
+        width: '100%',
+        height: '15%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modalInput: {
+        borderWidth: 1,
+        borderColor: "#E6DBC8",
+        borderRadius: 4,
+        padding: 12,
+        color: "#363232",
+        backgroundColor: "#F3F2F0",
+        fontFamily: 'imprima',
+        fontSize: 18,
+        marginHorizontal: 5,
+        width: '65%',
+        marginLeft: 10,
+    },
+    button: {
+        backgroundColor: "#E6DBC8",
+        padding: 12,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: "#E6DBC8",
+        fontFamily: 'imprima',
+        fontSize: 18,
+        alignItems: 'center',
+        width: '100%',
     },
 
 })
