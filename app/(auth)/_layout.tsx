@@ -1,45 +1,10 @@
-import { Link, Stack, Tabs } from 'expo-router';
+import { Tabs } from 'expo-router';
 import { useAuth } from '../../provider/AuthProvider';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Entypo, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import TabOneScreen from './chat-page';
+import { Octicons } from '@expo/vector-icons';
 
-
-// Simple stack layout within the authenticated area
-// const StackLayout = () => {
-//     const { signOut, session } = useAuth();
-
-//     return (
-//         <Stack
-//             screenOptions={{
-//                 headerStyle: {
-//                     backgroundColor: '#EDF0F6',
-//                 },
-//             }}>
-//             <Stack.Screen
-//                 name="account"
-//                 redirect={!session}
-//                 options={{
-//                     headerTitle: 'My Account',
-//                     headerRight: () => (
-//                         <TouchableOpacity onPress={signOut}>
-//                             <Ionicons name="log-out-outline" size={30} color={'#585555'} />
-//                         </TouchableOpacity>
-//                     ),
-//                 }}>
-
-//             </Stack.Screen>
-
-//             <Stack.Screen
-//                 name="chat-page">
-//             </Stack.Screen>
-
-//         </Stack>
-//     );
-// };
-
-// export default StackLayout;
 
 const TabLayout = () => {
 
@@ -55,16 +20,16 @@ const TabLayout = () => {
                 tabBarStyle: {
                     backgroundColor: '#EDF0F6',
                 },
-                tabBarActiveTintColor: '#363232', // Active tab text color
-                tabBarInactiveTintColor: '#585555',
+                tabBarActiveTintColor: '#000', // Active tab text color
+                tabBarInactiveTintColor: '#848484',
             }}
         >
             <Tabs.Screen
                 name="chat-page"
                 options={{
-                    title: "MUNCHR",
+                    title: "Munchr",
                     tabBarLabelStyle: {
-                        fontSize: 14,
+                        fontSize: 12,
                     },
                     headerTitleStyle: {
                         fontSize: 40,
@@ -73,21 +38,54 @@ const TabLayout = () => {
                         textShadowColor: '#baa582',
                         textShadowOffset: { width: 1, height: 1 },
                         textShadowRadius: 0.5,
+                        textTransform: 'uppercase',
                     },
                     tabBarIcon: ({ focused }) => (
-                        <Entypo name="bowl" color={focused ? '#363232' : '#585555'} size={28} />
+                        <Entypo name="bowl" color={focused ? '#000' : '#848484'} size={24} />
                     ),
                 }}
             />
             <Tabs.Screen
-                name="account"
+                name="shopping-list"
                 options={{
-                    title: "Account",
+                    title: "Shopping List",
                     tabBarLabelStyle: {
-                        fontSize: 14,
+                        fontSize: 12,
+                        marginBottom: -3,
+                    },
+                    headerTitleStyle: {
+                        fontFamily: 'imprima',
+                        fontSize: 30,
+                        color: '#E6DBC8',
+                        textShadowColor: '#baa582',
+                        textShadowOffset: { width: 1, height: 1 },
+                        textShadowRadius: 0.5,
                     },
                     tabBarIcon: ({ focused }) => (
-                        <MaterialCommunityIcons name="account" color={focused ? '#363232' : '#585555'} size={32} />
+                        <Octicons name="checklist" size={22} color={focused ? '#000' : '#848484'} />
+                    ),
+                }}
+            />
+
+
+            <Tabs.Screen
+                name="account"
+                options={{
+                    title: "My Account",
+                    tabBarLabelStyle: {
+                        fontSize: 12,
+                        marginBottom: -2,
+                    },
+                    headerTitleStyle: {
+                        fontFamily: 'imprima',
+                        fontSize: 30,
+                        color: '#E6DBC8',
+                        textShadowColor: '#baa582',
+                        textShadowOffset: { width: 1, height: 1 },
+                        textShadowRadius: 0.5,
+                    },
+                    tabBarIcon: ({ focused }) => (
+                        <MaterialCommunityIcons name="account" color={focused ? '#000' : '#848484'} size={32} />
                     ),
                     headerRight: () => (
                         <TouchableOpacity onPress={signOut}>

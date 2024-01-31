@@ -3,6 +3,8 @@ import { TextInput } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from "react";
 import ModalComponent from '../../components/modal';
+import { useNavigation } from '@react-navigation/native';
+import { useShoppingList } from "./shoppingListContext";
 
 const filterImage = require('/Users/kellysmulian/GitHub/munchr-app/assets/images/filter.png');
 
@@ -22,9 +24,33 @@ export default function TabOneScreen() {
         setShowShoppingList(!showShoppingList);
     };
 
+    const { setShoppingList } = useShoppingList();
+
+
+
+
+
+    const heading = "Grilled Lemon Herb Chicken"
+
+    const description = "This Grilled Lemon Herb Chicken is not only gluten-free but also low in fat high in protein."
+
     const recipe = "Instructions: \n\nPrepare the Marinade:\n\n 1. In a bowl, whisk together olive oil, fresh lemon juice, minced garlic, dried oregano, dried thyme, paprika, salt, and black pepper.\n2. Marinate the Chicken: \n3. Place the chicken breasts in a resealable plastic bag or a shallow dish.\n4. Pour the marinade over the chicken, ensuring that each piece is well-coated.\n5. Seal the bag or cover the dish and refrigerate for at least 30 minutes to marinate. For more flavor, you can marinate it for a few hours or overnight.\n\nPreheat the Grill";
 
-    const shopping = "6 boneless, skinless chicken breasts \n1 tbsp olive oil \n1 tbsp lemon juice \n1 clove garlic \n1/2 tsp dried oregano \n1/2 tsp dried thyme \n1/2 tsp paprika \n1/2 tsp salt and black pepper \nparsley or cilantro";
+    const shopping = "6 boneless, skinless chicken breasts\n1 tbsp olive oil\n1 tbsp lemon juice\n1 clove garlic\n1/2 tsp dried oregano\n1/2 tsp dried thyme\n1/2 tsp paprika \n1/2 tsp salt and black pepper\nparsley or cilantro";
+
+    const items = shopping.split('\n');
+
+    const itemsWithPlusSign = items.map((item, index) => (
+        <View key={index} style={styles.itemContainer}>
+            <Text style={styles.shoppingListText}>{item}</Text>
+            <AntDesign
+                name='plus'
+                size={22}
+                color="black"
+                onPress={() => setShoppingList(prevList => [...prevList, item])}
+            />
+        </View>
+    ));
 
 
     return (
@@ -32,8 +58,8 @@ export default function TabOneScreen() {
 
             <ScrollView style={styles.scrollView}>
                 <View style={styles.outputContainer}>
-                    <Text style={styles.outputHeading}>Grilled Lemon Herb Chicken</Text>
-                    <Text style={styles.outputSummary}>This Grilled Lemon Herb Chicken is not only gluten-free but also low in fat high in protein.</Text>
+                    <Text style={styles.outputHeading}>{heading}</Text>
+                    <Text style={styles.outputSummary}>{description}</Text>
 
                     <TouchableOpacity style={styles.toggleBlock} onPress={toggleFullRecipe}>
                         <View style={styles.buttonContainer}>
@@ -58,7 +84,7 @@ export default function TabOneScreen() {
                         </View>
                         {showShoppingList && (
                             <View style={styles.expandedBlock}>
-                                <Text style={styles.buttonText}>{shopping}</Text>
+                                {itemsWithPlusSign}
                             </View>
                         )}
 
@@ -99,9 +125,9 @@ const styles = StyleSheet.create({
     outputContainer: {
         flex: 1,
         backgroundColor: '#F3F2F0',
-        width: '92%',
+        width: '96%',
         alignItems: 'center',
-        marginHorizontal: '4%',
+        marginHorizontal: '2%',
         marginVertical: '5%',
         borderRadius: 6,
         shadowColor: "#000",
@@ -126,29 +152,29 @@ const styles = StyleSheet.create({
         color: '#585555',
         fontFamily: 'imprima',
     },
-    fullRecipeBlock: {
-        alignItems: "center",
-        borderWidth: 1,
-        borderColor: "#E6DBC8",
-        padding: 8,
-        borderRadius: 4,
-        marginBottom: 5,
-        marginTop: 10,
-        width: '90%',
-        flexDirection: "row",
-        justifyContent: 'center',
-    },
-    shoppingListBlock: {
-        alignItems: "center",
-        borderWidth: 1,
-        borderColor: "#E6DBC8",
-        padding: 8,
-        borderRadius: 4,
-        marginBottom: 10,
-        width: '90%',
-        flexDirection: "row",
-        justifyContent: 'center',
-    },
+    // fullRecipeBlock: {
+    //     alignItems: "center",
+    //     borderWidth: 1,
+    //     borderColor: "#E6DBC8",
+    //     padding: 8,
+    //     borderRadius: 4,
+    //     marginBottom: 5,
+    //     marginTop: 10,
+    //     width: '90%',
+    //     flexDirection: "row",
+    //     justifyContent: 'center',
+    // },
+    // shoppingListBlock: {
+    //     alignItems: "center",
+    //     borderWidth: 1,
+    //     borderColor: "#E6DBC8",
+    //     padding: 8,
+    //     borderRadius: 4,
+    //     marginBottom: 10,
+    //     width: '90%',
+    //     flexDirection: "row",
+    //     justifyContent: 'center',
+    // },
     inputContainer: {
         position: 'absolute',
         bottom: 0,
@@ -189,13 +215,19 @@ const styles = StyleSheet.create({
         padding: 8,
         borderRadius: 4,
         marginBottom: 10,
-        width: '90%',
+        width: '94%',
     },
     buttonText: {
         color: '#363232',
         fontFamily: 'imprima',
         fontSize: 18,
         marginRight: 20,
+    },
+    shoppingListText: {
+        color: '#363232',
+        fontFamily: 'imprima',
+        fontSize: 18,
+        marginRight: "1%",
     },
     underline: {
         color: '#363232',
@@ -206,10 +238,21 @@ const styles = StyleSheet.create({
     },
     expandedBlock: {
         backgroundColor: '#F3F2F0',
+        padding: 4,
+        borderRadius: 4,
+        marginTop: 10,
+        width: '100%',
+    },
+    itemContainer: {
+        backgroundColor: '#F3F2F0',
         padding: 8,
         borderRadius: 4,
         marginTop: 10,
         width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     buttonContainer: {
         flexDirection: 'row',
