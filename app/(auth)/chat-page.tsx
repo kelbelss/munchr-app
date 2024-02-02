@@ -37,22 +37,6 @@ export default function TabOneScreen() {
 
     const space = "\n\n"
 
-    // const items = recipeIngredients ? recipeIngredients.split('\n') : [];
-
-    // const items = recipeIngredients.split(',');
-
-    // const itemsWithPlusSign = items.map((item, index) => (
-    //     <View key={index} style={styles.itemContainer}>
-    //         <Text style={styles.shoppingListText}>{item}</Text>
-    //         <AntDesign
-    //             name='plus'
-    //             size={22}
-    //             color="black"
-    //             onPress={() => setShoppingList(prevList => [...prevList, item])}
-    //         />
-    //     </View>
-    // ));
-
 
     return (
         <View style={styles.container}>
@@ -72,7 +56,14 @@ export default function TabOneScreen() {
                             </View>
                             {showFullRecipe && (
                                 <View style={styles.expandedBlock}>
-                                    <Text style={styles.buttonTextRec}>Ingredients: {space}{recipeIngredients}{space}{space}Instructions:{space}{recipeInstructions}</Text>
+                                    <Text style={styles.buttonTextRec}>Ingredients: {space}
+                                        {recipeIngredients.map((ingredient, index) => (
+                                            <Text key={index}>{ingredient}{"\n"}</Text>
+                                        ))}
+                                        {"\n"}Instructions: {space}
+                                        {recipeInstructions.map((instruction, index) => (
+                                            <Text key={index}>{instruction}{space}</Text>
+                                        ))}</Text>
                                 </View>
                             )}
                         </TouchableOpacity>
@@ -186,29 +177,6 @@ const styles = StyleSheet.create({
         color: '#585555',
         fontFamily: 'imprima',
     },
-    // fullRecipeBlock: {
-    //     alignItems: "center",
-    //     borderWidth: 1,
-    //     borderColor: "#E6DBC8",
-    //     padding: 8,
-    //     borderRadius: 4,
-    //     marginBottom: 5,
-    //     marginTop: 10,
-    //     width: '90%',
-    //     flexDirection: "row",
-    //     justifyContent: 'center',
-    // },
-    // shoppingListBlock: {
-    //     alignItems: "center",
-    //     borderWidth: 1,
-    //     borderColor: "#E6DBC8",
-    //     padding: 8,
-    //     borderRadius: 4,
-    //     marginBottom: 10,
-    //     width: '90%',
-    //     flexDirection: "row",
-    //     justifyContent: 'center',
-    // },
     inputContainer: {
         position: 'absolute',
         bottom: 0,
