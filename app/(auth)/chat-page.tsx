@@ -3,8 +3,8 @@ import { TextInput } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from "react";
 import ModalComponent from '../../components/modal';
-import { useNavigation } from '@react-navigation/native';
 import { useShoppingList } from "./shoppingListContext";
+import { supabase } from '/Users/kellysmulian/GitHub/munchr-app/config/supabase';
 
 const filterImage = require('/Users/kellysmulian/GitHub/munchr-app/assets/images/filter.png');
 
@@ -28,70 +28,85 @@ export default function TabOneScreen() {
 
 
 
+    const [responseReceived, setResponseReceived] = useState(false);
+    const [meal, setMeal] = useState("");
+    const [recipeTitle, setRecipeTitle] = useState("");
+    const [recipeDescription, setRecipeDescription] = useState("");
+    const [recipeIngredients, setRecipeIngredients] = useState([]);
+    const [recipeInstructions, setRecipeInstructions] = useState([]);
+
     const space = "\n\n"
 
-    const heading = "Grilled Lemon Herb Chicken"
+    // const items = recipeIngredients ? recipeIngredients.split('\n') : [];
 
-    const description = "This Grilled Lemon Herb Chicken is not only gluten-free but also low in fat high in protein."
+    // const items = recipeIngredients.split(',');
 
-    const recipe = "Prepare the Marinade:\n\n 1. In a bowl, whisk together olive oil, fresh lemon juice, minced garlic, dried oregano, dried thyme, paprika, salt, and black pepper.\n\nMarinate the Chicken: \n\n2. Place the chicken breasts in a resealable plastic bag or a shallow dish.\n\n3. Pour the marinade over the chicken, ensuring that each piece is well-coated.\n\n4. Seal the bag or cover the dish and refrigerate for at least 30 minutes to marinate. For more flavor, you can marinate it for a few hours or overnight.\n\nPreheat the Grill";
-
-    const shopping = "6 boneless, skinless chicken breasts\n1 tbsp olive oil\n1 tbsp lemon juice\n1 clove garlic\n1/2 tsp dried oregano\n1/2 tsp dried thyme\n1/2 tsp paprika \n1/2 tsp salt and black pepper\nparsley or cilantro";
-
-    const items = shopping.split('\n');
-
-    const itemsWithPlusSign = items.map((item, index) => (
-        <View key={index} style={styles.itemContainer}>
-            <Text style={styles.shoppingListText}>{item}</Text>
-            <AntDesign
-                name='plus'
-                size={22}
-                color="black"
-                onPress={() => setShoppingList(prevList => [...prevList, item])}
-            />
-        </View>
-    ));
+    // const itemsWithPlusSign = items.map((item, index) => (
+    //     <View key={index} style={styles.itemContainer}>
+    //         <Text style={styles.shoppingListText}>{item}</Text>
+    //         <AntDesign
+    //             name='plus'
+    //             size={22}
+    //             color="black"
+    //             onPress={() => setShoppingList(prevList => [...prevList, item])}
+    //         />
+    //     </View>
+    // ));
 
 
     return (
         <View style={styles.container}>
 
             <ScrollView style={styles.scrollView}>
-                <View style={styles.outputContainer}>
-                    <Text style={styles.outputHeading}>{heading}</Text>
-                    <Text style={styles.outputSummary}>{description}</Text>
+                {responseReceived ? (
+                    <View style={styles.outputContainer}>
+                        <Text style={styles.outputHeading}>{recipeTitle}</Text>
+                        <Text style={styles.outputSummary}>{recipeDescription}</Text>
 
-                    <TouchableOpacity style={styles.toggleBlock} onPress={toggleFullRecipe}>
-                        <View style={styles.buttonContainer}>
-                            <Text style={[styles.buttonText, showFullRecipe ? styles.underline : {}]}>
-                                Full Recipe
-                            </Text>
-                            <AntDesign name={showFullRecipe ? 'up' : 'down'} size={24} color="black" />
-                        </View>
-                        {showFullRecipe && (
-                            <View style={styles.expandedBlock}>
-                                <Text style={styles.buttonTextRec}>Ingredients: {space}{shopping}{space}{space}Instructions:{space}{recipe}</Text>
+                        <TouchableOpacity style={styles.toggleBlock} onPress={toggleFullRecipe}>
+                            <View style={styles.buttonContainer}>
+                                <Text style={[styles.buttonText, showFullRecipe ? styles.underline : {}]}>
+                                    Full Recipe
+                                </Text>
+                                <AntDesign name={showFullRecipe ? 'up' : 'down'} size={24} color="black" />
                             </View>
-                        )}
-                    </TouchableOpacity>
+                            {showFullRecipe && (
+                                <View style={styles.expandedBlock}>
+                                    <Text style={styles.buttonTextRec}>Ingredients: {space}{recipeIngredients}{space}{space}Instructions:{space}{recipeInstructions}</Text>
+                                </View>
+                            )}
+                        </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.toggleBlock} onPress={toggleShoppingList}>
-                        <View style={styles.buttonContainer}>
-                            <Text style={[styles.buttonText, showShoppingList ? styles.underline : {}]}>
-                                Shopping List
-                            </Text>
-                            <AntDesign name={showShoppingList ? 'up' : 'down'} size={24} color="black" />
-                        </View>
-                        {showShoppingList && (
-                            <View style={styles.expandedBlock}>
-                                {itemsWithPlusSign}
+                        <TouchableOpacity style={styles.toggleBlock} onPress={toggleShoppingList}>
+                            <View style={styles.buttonContainer}>
+                                <Text style={[styles.buttonText, showShoppingList ? styles.underline : {}]}>
+                                    Shopping List
+                                </Text>
+                                <AntDesign name={showShoppingList ? 'up' : 'down'} size={24} color="black" />
                             </View>
-                        )}
+                            {showShoppingList && (
+                                <View style={styles.expandedBlock}>
+                                    {/* {responseReceived && itemsWithPlusSign} */}
+                                    {recipeIngredients.map((ingredient, index) => (
+                                        <View key={index} style={styles.itemContainer}>
+                                            <Text style={styles.shoppingListText}>{ingredient}</Text>
+                                            <AntDesign
+                                                name='plus'
+                                                size={22}
+                                                color="black"
+                                                onPress={() => setShoppingList(prevList => [...prevList, ingredient])}
+                                            />
+                                        </View>
+                                    ))}
+                                </View>
+                            )}
 
-                    </TouchableOpacity>
+                        </TouchableOpacity>
 
 
-                </View>
+                    </View>
+
+                ) : null}
             </ScrollView >
 
 
@@ -104,8 +119,27 @@ export default function TabOneScreen() {
                         <Image style={{ opacity: pressed ? 0.5 : 1, height: 45, width: 40, marginTop: 32 }} source={filterImage} />
                     )}
                 </Pressable>
-                <TextInput autoCapitalize="none" placeholder="Ask Munchr" style={styles.userInput} />
-                <TouchableOpacity style={styles.button}>
+                <TextInput autoCapitalize="none" placeholder="Ask Munchr" style={styles.userInput} value={meal} onChangeText={setMeal} />
+                <TouchableOpacity style={styles.button}
+                    onPress={async () => {
+                        const { data, error } = await supabase.functions.invoke("recipe-request", {
+                            body: { meal },
+                        });
+                        if (data && data.recipe) {
+
+                            console.log("Ingredients from API:", data.recipe.ingredients);
+
+
+                            setRecipeTitle(data.recipe.title);
+                            setRecipeDescription(data.recipe.description);
+                            setRecipeIngredients(data.recipe.ingredients);
+                            setRecipeInstructions(data.recipe.instructions);
+                            setResponseReceived(true);
+                        }
+                        console.log(data);
+                        console.log(error);
+                    }}
+                >
                     <Text style={{ color: '#363232', fontFamily: 'imprima', fontSize: 18 }}>Submit</Text>
                 </TouchableOpacity>
             </View>
