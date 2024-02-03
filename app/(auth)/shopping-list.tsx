@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         alignItems: 'center',
         marginHorizontal: "30%",
-        marginBottom: "2%",
+        marginVertical: "2%",
     },
     buttonContainer: {
         flex: 1,

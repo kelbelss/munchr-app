@@ -1,10 +1,11 @@
 import { Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons';
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ModalComponent from '../../components/modal';
-import { useNavigation } from '@react-navigation/native';
 import { useShoppingList } from "./shoppingListContext";
+import { supabase } from '/Users/kellysmulian/GitHub/munchr-app/config/supabase';
+import { Animated, Easing } from 'react-native';
 
 const filterImage = require('/Users/kellysmulian/GitHub/munchr-app/assets/images/filter.png');
 
@@ -26,73 +27,189 @@ export default function TabOneScreen() {
 
     const { setShoppingList } = useShoppingList();
 
+    const [loading, setLoading] = useState(false);
+    const cancelToken = useRef(false);
+
+    const handleRecipeRequest = async () => {
+        setLoading(true);
+        cancelToken.current = false;
+        try {
+            const { data, error } = await supabase.functions.invoke("recipe-request", {
+                body: { meal },
+            });
+
+            if (cancelToken.current) {
+                return;
+            }
+
+            setMeal("");
 
 
+            if (data && data.recipe) {
+                setRecipeTitle(data.recipe.title);
+                setRecipeDescription(data.recipe.description);
+                setRecipeIngredients(data.recipe.ingredients);
+                setRecipeInstructions(data.recipe.instructions);
+                setResponseReceived(true);
+            }
+            console.log(data);
+            console.log(error);
+        } catch (error) {
+            console.error("Error fetching recipe:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Stop Generating Button
+    const cancelRequest = () => {
+        cancelToken.current = true;
+        setMeal("");
+        setRecipeTitle("");
+        setRecipeDescription("");
+        setRecipeIngredients([]);
+        setRecipeInstructions([]);
+        setResponseReceived(false);
+        setLoading(false);
+    };
 
 
-    const heading = "Grilled Lemon Herb Chicken"
+    const [responseReceived, setResponseReceived] = useState(false);
+    const [meal, setMeal] = useState("");
+    const [recipeTitle, setRecipeTitle] = useState("");
+    const [recipeDescription, setRecipeDescription] = useState("");
+    const [recipeIngredients, setRecipeIngredients] = useState([]);
+    const [recipeInstructions, setRecipeInstructions] = useState([]);
 
-    const description = "This Grilled Lemon Herb Chicken is not only gluten-free but also low in fat high in protein."
+    const space = "\n\n"
 
-    const recipe = "Instructions: \n\nPrepare the Marinade:\n\n 1. In a bowl, whisk together olive oil, fresh lemon juice, minced garlic, dried oregano, dried thyme, paprika, salt, and black pepper.\n2. Marinate the Chicken: \n3. Place the chicken breasts in a resealable plastic bag or a shallow dish.\n4. Pour the marinade over the chicken, ensuring that each piece is well-coated.\n5. Seal the bag or cover the dish and refrigerate for at least 30 minutes to marinate. For more flavor, you can marinate it for a few hours or overnight.\n\nPreheat the Grill";
+    // Loading Screen Animation
+    const tilt = useState(new Animated.Value(0))[0];
 
-    const shopping = "6 boneless, skinless chicken breasts\n1 tbsp olive oil\n1 tbsp lemon juice\n1 clove garlic\n1/2 tsp dried oregano\n1/2 tsp dried thyme\n1/2 tsp paprika \n1/2 tsp salt and black pepper\nparsley or cilantro";
+    const tiltAnimation = () => {
+        Animated.loop(
+            Animated.sequence([
+                Animated.timing(tilt, {
+                    toValue: 3,
+                    duration: 3000,
+                    easing: Easing.ease,
+                    useNativeDriver: true
+                }),
+                Animated.timing(tilt, {
+                    toValue: -3,
+                    duration: 3000,
+                    easing: Easing.ease,
+                    useNativeDriver: true
+                }),
+                Animated.timing(tilt, {
+                    toValue: 3,
+                    duration: 3000,
+                    easing: Easing.ease,
+                    useNativeDriver: true
+                }),
+                Animated.timing(tilt, {
+                    toValue: -3,
+                    duration: 3000,
+                    easing: Easing.ease,
+                    useNativeDriver: true
+                }),
+            ]),
+        ).start();
+    };
 
-    const items = shopping.split('\n');
-
-    const itemsWithPlusSign = items.map((item, index) => (
-        <View key={index} style={styles.itemContainer}>
-            <Text style={styles.shoppingListText}>{item}</Text>
-            <AntDesign
-                name='plus'
-                size={22}
-                color="black"
-                onPress={() => setShoppingList(prevList => [...prevList, item])}
-            />
-        </View>
-    ));
+    useEffect(() => {
+        tiltAnimation();
+    }, []);
 
 
     return (
         <View style={styles.container}>
 
-            <ScrollView style={styles.scrollView}>
-                <View style={styles.outputContainer}>
-                    <Text style={styles.outputHeading}>{heading}</Text>
-                    <Text style={styles.outputSummary}>{description}</Text>
-
-                    <TouchableOpacity style={styles.toggleBlock} onPress={toggleFullRecipe}>
-                        <View style={styles.buttonContainer}>
-                            <Text style={[styles.buttonText, showFullRecipe ? styles.underline : {}]}>
-                                Full Recipe
-                            </Text>
-                            <AntDesign name={showFullRecipe ? 'up' : 'down'} size={24} color="black" />
-                        </View>
-                        {showFullRecipe && (
-                            <View style={styles.expandedBlock}>
-                                <Text style={styles.buttonText}>{recipe}</Text>
-                            </View>
-                        )}
+            {loading ? (
+                <View style={styles.loadingContainer}>
+                    <Animated.Image
+                        source={require('/Users/kellysmulian/GitHub/munchr-app/assets/images/icon.png')}
+                        style={[
+                            styles.logo,
+                            {
+                                transform: [
+                                    {
+                                        rotateZ: tilt.interpolate({
+                                            inputRange: [-1, 1],
+                                            outputRange: ['-8deg', '8deg'],
+                                        }),
+                                    },
+                                ],
+                            },
+                        ]}
+                    />
+                    <Text style={styles.textLoading}>
+                        He's cooking!
+                    </Text>
+                    <TouchableOpacity style={styles.cancelButton} onPress={cancelRequest}>
+                        <Text style={{ color: '#363232', fontFamily: 'imprima', fontSize: 18, textDecorationLine: 'underline' }}>Stop generating</Text>
                     </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.toggleBlock} onPress={toggleShoppingList}>
-                        <View style={styles.buttonContainer}>
-                            <Text style={[styles.buttonText, showShoppingList ? styles.underline : {}]}>
-                                Shopping List
-                            </Text>
-                            <AntDesign name={showShoppingList ? 'up' : 'down'} size={24} color="black" />
-                        </View>
-                        {showShoppingList && (
-                            <View style={styles.expandedBlock}>
-                                {itemsWithPlusSign}
-                            </View>
-                        )}
-
-                    </TouchableOpacity>
-
-
                 </View>
-            </ScrollView >
+            ) : (
+
+                <ScrollView style={styles.scrollView}>
+                    {responseReceived ? (
+                        <View style={styles.outputContainer}>
+                            <Text style={styles.outputHeading}>{recipeTitle}</Text>
+                            <Text style={styles.outputSummary}>{recipeDescription}</Text>
+
+                            <TouchableOpacity style={styles.toggleBlock} onPress={toggleFullRecipe}>
+                                <View style={styles.buttonContainer}>
+                                    <Text style={[styles.buttonText, showFullRecipe ? styles.underline : {}]}>
+                                        Full Recipe
+                                    </Text>
+                                    <AntDesign name={showFullRecipe ? 'up' : 'down'} size={24} color="black" />
+                                </View>
+                                {showFullRecipe && (
+                                    <View style={styles.expandedBlock}>
+                                        <Text style={styles.buttonTextRec}>Ingredients: {space}
+                                            {recipeIngredients.map((ingredient, index) => (
+                                                <Text key={index}>{ingredient}{"\n"}</Text>
+                                            ))}
+                                            {"\n"}Instructions: {space}
+                                            {recipeInstructions.map((instruction, index) => (
+                                                <Text key={index}>{index + 1}. {instruction}{space}</Text>
+                                            ))}</Text>
+                                    </View>
+                                )}
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={styles.toggleBlock} onPress={toggleShoppingList}>
+                                <View style={styles.buttonContainer}>
+                                    <Text style={[styles.buttonText, showShoppingList ? styles.underline : {}]}>
+                                        Shopping List
+                                    </Text>
+                                    <AntDesign name={showShoppingList ? 'up' : 'down'} size={24} color="black" />
+                                </View>
+                                {showShoppingList && (
+                                    <View style={styles.expandedBlock}>
+                                        {recipeIngredients.map((ingredient, index) => (
+                                            <View key={index} style={styles.itemContainer}>
+                                                <Text style={styles.shoppingListText}>{ingredient}</Text>
+                                                <AntDesign
+                                                    name='plus'
+                                                    size={22}
+                                                    color="black"
+                                                    onPress={() => setShoppingList(prevList => [...prevList, ingredient])}
+                                                />
+                                            </View>
+                                        ))}
+                                    </View>
+                                )}
+
+                            </TouchableOpacity>
+
+
+                        </View>
+
+                    ) : null}
+                </ScrollView >
+            )}
 
 
             <ModalComponent modalVisible={modalVisible} setModalVisible={setModalVisible} />
@@ -101,11 +218,15 @@ export default function TabOneScreen() {
             <View style={styles.inputContainer}>
                 <Pressable onPress={() => setModalVisible(true)}>
                     {({ pressed }) => (
-                        <Image style={{ opacity: pressed ? 0.5 : 1, height: 45, width: 40, marginTop: 32 }} source={filterImage} />
+                        <Image style={{ opacity: pressed ? 0.5 : 1, height: 40, width: 45, marginTop: 32 }} source={filterImage} />
                     )}
                 </Pressable>
-                <TextInput autoCapitalize="none" placeholder="Ask Munchr" style={styles.userInput} />
-                <TouchableOpacity style={styles.button}>
+                <TextInput autoCapitalize="none" placeholder="Ask Munchr" style={styles.userInput} value={meal} onChangeText={setMeal} />
+                <TouchableOpacity style={styles.button}
+
+                    onPress={handleRecipeRequest}
+                    disabled={loading}
+                >
                     <Text style={{ color: '#363232', fontFamily: 'imprima', fontSize: 18 }}>Submit</Text>
                 </TouchableOpacity>
             </View>
@@ -143,6 +264,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         marginTop: 10,
         fontFamily: 'imprima',
+        textAlign: 'center',
     },
     outputSummary: {
         fontSize: 16,
@@ -152,32 +274,9 @@ const styles = StyleSheet.create({
         color: '#585555',
         fontFamily: 'imprima',
     },
-    // fullRecipeBlock: {
-    //     alignItems: "center",
-    //     borderWidth: 1,
-    //     borderColor: "#E6DBC8",
-    //     padding: 8,
-    //     borderRadius: 4,
-    //     marginBottom: 5,
-    //     marginTop: 10,
-    //     width: '90%',
-    //     flexDirection: "row",
-    //     justifyContent: 'center',
-    // },
-    // shoppingListBlock: {
-    //     alignItems: "center",
-    //     borderWidth: 1,
-    //     borderColor: "#E6DBC8",
-    //     padding: 8,
-    //     borderRadius: 4,
-    //     marginBottom: 10,
-    //     width: '90%',
-    //     flexDirection: "row",
-    //     justifyContent: 'center',
-    // },
     inputContainer: {
         position: 'absolute',
-        bottom: 0,
+        bottom: 4,
         width: '100%',
         height: '15%',
         flexDirection: 'row',
@@ -223,11 +322,20 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginRight: 20,
     },
+    buttonTextRec: {
+        color: '#363232',
+        fontFamily: 'imprima',
+        fontSize: 18,
+        marginRight: 20,
+        textAlign: "justify",
+        lineHeight: 25,
+    },
     shoppingListText: {
         color: '#363232',
         fontFamily: 'imprima',
         fontSize: 18,
         marginRight: "1%",
+        width: '85%',
     },
     underline: {
         color: '#363232',
@@ -238,10 +346,11 @@ const styles = StyleSheet.create({
     },
     expandedBlock: {
         backgroundColor: '#F3F2F0',
-        padding: 4,
+        padding: 6,
         borderRadius: 4,
         marginTop: 10,
         width: '100%',
+        marginRight: '-4%',
     },
     itemContainer: {
         backgroundColor: '#F3F2F0',
@@ -258,5 +367,26 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+    },
+    logo: {
+        width: 140,
+        height: 140,
+        marginBottom: 30,
+        marginTop: '-60%',
+    },
+    loadingContainer: {
+        padding: '10%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
+    },
+    textLoading: {
+        fontSize: 30,
+        fontFamily: 'imprima',
+        color: '#363232',
+    },
+    cancelButton: {
+        marginTop: '20%',
     },
 });
