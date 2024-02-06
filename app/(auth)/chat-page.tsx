@@ -4,13 +4,12 @@ import { AntDesign } from '@expo/vector-icons';
 import { useEffect, useState, useRef } from "react";
 import ModalComponent from '../../components/modal';
 import { useShoppingList } from "./shoppingListContext";
-import { supabase } from '/Users/kellysmulian/GitHub/munchr-app/config/supabase';
+import { supabase } from '../../config/supabase';
 import { Animated, Easing } from 'react-native';
 
-const filterImage = require('/Users/kellysmulian/GitHub/munchr-app/assets/images/filter.png');
+const filterImage = require('../../assets/images/filter.png');
 
 export default function TabOneScreen() {
-
     // modal
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -34,8 +33,9 @@ export default function TabOneScreen() {
         setLoading(true);
         cancelToken.current = false;
         try {
+            console.log("Requesting meal:", meal)
             const { data, error } = await supabase.functions.invoke("recipe-request", {
-                body: { meal },
+                body: {meal}
             });
 
             if (cancelToken.current) {
@@ -52,8 +52,8 @@ export default function TabOneScreen() {
                 setRecipeInstructions(data.recipe.instructions);
                 setResponseReceived(true);
             }
-            console.log(data);
-            console.log(error);
+            console.log("Data", data);
+            console.log("Error", error);
         } catch (error) {
             console.error("Error fetching recipe:", error);
         } finally {
@@ -128,7 +128,7 @@ export default function TabOneScreen() {
             {loading ? (
                 <View style={styles.loadingContainer}>
                     <Animated.Image
-                        source={require('/Users/kellysmulian/GitHub/munchr-app/assets/images/icon.png')}
+                        source={require('../../assets/images/icon.png')}
                         style={[
                             styles.logo,
                             {
