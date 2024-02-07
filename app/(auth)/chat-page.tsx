@@ -147,7 +147,7 @@ export default function TabOneScreen() {
                         He's cooking!
                     </Text>
                     <TouchableOpacity style={styles.cancelButton} onPress={cancelRequest}>
-                        <Text style={{ color: '#363232', fontFamily: 'imprima', fontSize: 18, textDecorationLine: 'underline' }}>Stop generating</Text>
+                        <Text style={{ color: '#363232', fontFamily: 'imprima', fontSize: 18, textDecorationLine: 'underline' }}>Stop generating...</Text>
                     </TouchableOpacity>
                 </View>
             ) : (
@@ -211,9 +211,7 @@ export default function TabOneScreen() {
                 </ScrollView >
             )}
 
-
             <ModalComponent modalVisible={modalVisible} setModalVisible={setModalVisible} />
-
 
             <View style={styles.inputContainer}>
                 <Pressable onPress={() => setModalVisible(true)}>
@@ -230,6 +228,7 @@ export default function TabOneScreen() {
                     <Text style={{ color: '#363232', fontFamily: 'imprima', fontSize: 18 }}>Submit</Text>
                 </TouchableOpacity>
             </View>
+
         </View >
     );
 }
@@ -276,9 +275,9 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         position: 'absolute',
-        bottom: 4,
+        bottom: 2,
         width: '100%',
-        height: '15%',
+        height: '14%',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
