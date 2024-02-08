@@ -118,13 +118,13 @@ const styles = StyleSheet.create({
         textShadowRadius: 0.5,
     },
     logo: {
-        height: 180,
-        width: 180,
+        height: '22%',
+        width: '50%',
         alignSelf: 'center',
-        marginBottom: 50,
+        marginBottom: '10%',
     },
     inputField: {
-        marginVertical: 4,
+        marginVertical: '1%',
         height: 50,
         borderWidth: 1,
         borderColor: "#E6DBC8",
